@@ -1,0 +1,136 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}Sell to Avefon Trade Ltd
+{% block extra_js %}
+<script>
+function toggleCustomBank(sel) {
+  var wrap  = document.getElementById('customBankWrap');
+  var input = document.getElementById('customBankInput');
+  if (sel.value === '__other__') {
+    wrap.style.display = 'block';
+    input.required = true;
+    // Clear the select so the form doesn't submit "__other__"
+    sel.removeAttribute('required');
+  } else {
+    wrap.style.display = 'none';
+    input.required = false;
+    sel.required = true;
+  }
+}
+</script>
+{% endblock %}
+{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;min-height:80vh;padding:40px 0">
+  <div class="container" style="max-width:700px;margin:0 auto">
+    {% if messages %}{% for msg in messages %}
+    <div style="padding:12px 16px;border-radius:8px;margin-bottom:16px;background:#E8F5E9;color:#1B5E20">{{ msg }}</div>
+    {% endfor %}{% endif %}
+
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(27,45,107,0.1)">
+      <div style="background:#1B2D6B;padding:18px 24px;display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="color:#fff;font-size:17px;font-weight:700">🏷 Sell to <span style="color:#D4AF37">Avefon Trade Ltd</span></div>
+          <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:3px">Fill carefully — we'll contact you within 24 hours</div>
+        </div>
+        <a href="{% url 'frontend:product-listing' %}" style="color:rgba(255,255,255,0.6);font-size:22px;text-decoration:none">×</a>
+      </div>
+      <div style="padding:26px">
+        {% if item %}
+        <div style="background:#EEF1FB;border-left:3px solid #1B2D6B;border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:18px">
+          <div style="font-size:13px;font-weight:700;color:#1B2D6B">{{ item.name }}</div>
+          <div style="font-size:12px;color:#6B7280;margin-top:3px">We pay up to GH₵ {{ item.price }} / {{ item.unit }} | Min: {{ item.min_qty }} {{ item.unit }}(s)</div>
+        </div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% if item %}<input type="hidden" name="item_id" value="{{ item.id }}">{% endif %}
+
+          <div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #E0E4EF">📦 Item Information</div>
+
+          <div style="margin-bottom:14px">
+            <label class="av-lbl">Item Name *</label>
+            <input name="item_name" class="av-input" value="{{ item.name|default:'' }}" placeholder="e.g. Men's Ankara Long Sleeve Shirt" required>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px">
+            <div><label class="av-lbl">Quantity *</label><input type="number" name="quantity" class="av-input" placeholder="e.g. 50" required min="1"></div>
+            <div><label class="av-lbl">Your Price (GH₵) *</label><input type="number" name="asking_price" class="av-input" placeholder="Per unit" required step="0.01"></div>
+            <div><label class="av-lbl">Condition</label>
+              <select name="condition" class="av-select">
+                <option>Brand New</option><option>New with Tags</option><option>Wholesale/Bulk</option><option>Factory Direct</option><option>Bale Goods</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:14px"><label class="av-lbl">Description</label><textarea name="description" class="av-textarea" rows="2" placeholder="Fabric type, sizes, colors, origin, design details…"></textarea></div>
+          <div style="margin-bottom:18px"><label class="av-lbl">Product Photos</label><input type="file" name="photos" class="av-input" accept="image/*" multiple style="padding:8px"><div class="av-hint">Upload clear photos — JPG, PNG, WEBP accepted</div></div>
+
+          <hr style="border:none;border-top:1px solid #E0E4EF;margin:18px 0">
+
+          <div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #E0E4EF">👤 Your Contact Info</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+            <div><label class="av-lbl">Full Name *</label><input name="seller_name" class="av-input" value="{% if user.is_authenticated %}{{ user.get_full_name }}{% endif %}" placeholder="Your full name" required></div>
+            <div><label class="av-lbl">Phone Number *</label><input type="tel" name="seller_phone" class="av-input" placeholder="+233 XX XXX XXXX" required></div>
+          </div>
+          <div style="margin-bottom:18px"><label class="av-lbl">Email (optional)</label><input type="email" name="seller_email" class="av-input" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" placeholder="your@email.com"></div>
+
+          <hr style="border:none;border-top:1px solid #E0E4EF;margin:18px 0">
+
+          <div style="background:#FDF6DC;border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:16px;margin-bottom:14px">
+            <div style="font-size:11px;font-weight:700;color:#8A7010;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:14px">💳 Payment Details — Where Avefon Sends Your Money</div>
+            <div style="margin-bottom:12px"><label class="av-lbl">Account Holder Full Name *</label><input name="account_name" class="av-input" placeholder="Exact name on your bank account" required></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+              <div><label class="av-lbl">Bank / Mobile Money *</label>
+                <select name="bank_name" id="bankSelect" class="av-select" onchange="toggleCustomBank(this)">
+                  <option value="">— Select Bank or MoMo —</option>
+                  <optgroup label="🏦 Banks">
+                    <option>GCB Bank</option>
+                    <option>Ecobank Ghana</option>
+                    <option>Absa Bank Ghana</option>
+                    <option>Fidelity Bank Ghana</option>
+                    <option>Zenith Bank Ghana</option>
+                    <option>Standard Chartered Ghana</option>
+                    <option>Cal Bank</option>
+                    <option>Consolidated Bank Ghana</option>
+                    <option>Agricultural Development Bank (ADB)</option>
+                    <option>NIB Bank Ghana</option>
+                    <option>Prudential Bank Ghana</option>
+                    <option>First Atlantic Bank</option>
+                    <option>OmniBSIC Bank</option>
+                    <option>ARB Apex Bank</option>
+                  </optgroup>
+                  <optgroup label="📱 Mobile Money">
+                    <option>MTN Mobile Money (MoMo)</option>
+                    <option>Vodafone Cash</option>
+                    <option>AirtelTigo Money</option>
+                  </optgroup>
+                  <optgroup label="✏️ Other">
+                    <option value="__other__">My bank is not listed — enter manually</option>
+                  </optgroup>
+                </select>
+                <!-- Custom bank input — shown when "not listed" is selected -->
+                <div id="customBankWrap" style="display:none;margin-top:8px">
+                  <input type="text" name="bank_name_custom" id="customBankInput" class="av-input"
+                    placeholder="Type your bank or MoMo provider name…"
+                    style="border:1px solid #D4AF37;background:#FFFDF0">
+                  <div style="font-size:11px;color:#8A7010;margin-top:4px">✏️ Enter your bank name exactly as it appears on your account</div>
+                </div>
+              </div>
+              <div><label class="av-lbl">Account / MoMo Number *</label><input name="account_number" class="av-input" placeholder="Account number" required></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div><label class="av-lbl">Branch (if Bank)</label><input name="branch" class="av-input" placeholder="e.g. Accra Central"></div>
+              <div><label class="av-lbl">Your Phone</label><input type="tel" name="seller_phone2" class="av-input" placeholder="+233 XX XXX XXXX"></div>
+            </div>
+            <div style="font-size:11px;color:#8A7010;font-weight:700;margin-top:10px">⚠ Double-check — Avefon pays here after goods receipt. Not responsible for wrong details.</div>
+          </div>
+
+          <button type="submit" class="av-submit" style="font-size:15px;padding:14px">
+            📤 Submit Offer to Avefon Trade Ltd
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

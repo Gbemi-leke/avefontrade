@@ -1,0 +1,140 @@
+{% extends 'backend/base-dashboard.html' %}
+{% block title %}{% if product %}Edit{% else %}Add{% endif %} Buying Item — Avefon Admin{% endblock %}
+{% block sidebar_role %}⚙️ Admin Panel{% endblock %}
+{% block user_role_label %}Administrator{% endblock %}
+{% block page_title %}{% if product %}Edit Item{% else %}Add New Item{% endif %}{% endblock %}
+{% block sidebar_nav %}
+<div class="dash-nav-section">Overview</div>
+<a href="{% url 'backend:admin-dashboard' %}" class="dash-nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+<div class="dash-nav-section">Management</div>
+<a href="{% url 'backend:admin-sellers' %}" class="dash-nav-link"><i class="fas fa-users"></i> All Sellers</a>
+<a href="{% url 'backend:admin-offers' %}" class="dash-nav-link"><i class="fas fa-tags"></i> All Offers</a>
+<a href="{% url 'backend:admin-products' %}" class="dash-nav-link"><i class="fas fa-box-open"></i> Buying Items</a>
+<a href="{% url 'backend:add-product' %}" class="dash-nav-link {% if not product %}active{% endif %}" style="color:#D4AF37"><i class="fas fa-plus-circle"></i> Add New Item</a>
+<div class="dash-nav-section">Account</div>
+<a href="{% url 'backend:edit-profile' %}" class="dash-nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
+<a href="{% url 'backend:change-password' %}" class="dash-nav-link"><i class="fas fa-lock"></i> Change Password</a>
+<a href="#" onclick="showLogoutModal();return false" class="dash-nav-link" style="color:#F87171"><i class="fas fa-sign-out-alt"></i> Logout</a>
+{% endblock %}
+
+{% block dashboard_content %}
+<div style="max-width:660px">
+  <a href="{% url 'backend:admin-products' %}" style="font-size:13px;color:#1B2D6B;font-weight:600;display:inline-flex;align-items:center;gap:6px;margin-bottom:16px">← Back to Buying Items</a>
+
+  <div class="dash-card">
+    <div class="dash-card-head">
+      <div class="dash-card-title">
+        <i class="fas fa-{% if product %}edit{% else %}plus-circle{% endif %}"></i>
+        {% if product %}Edit: {{ product.name }}{% else %}Add New Buying Item{% endif %}
+      </div>
+    </div>
+    <div style="padding:24px">
+      <!-- enctype MUST be multipart for image upload -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Image Upload -->
+        <div class="dash-form-group">
+          <label>Product Image</label>
+          <div style="display:flex;align-items:flex-start;gap:16px">
+            <!-- Preview box -->
+            <div id="imgPreviewWrap" style="width:100px;height:100px;border-radius:8px;border:2px dashed #D0D8F0;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#F5F6FA">
+              {% if product and product.image %}
+                <img id="imgPreview" src="{{ product.image.url }}" style="width:100%;height:100%;object-fit:cover">
+              {% else %}
+                <span id="imgPreview" style="font-size:32px">🖼</span>
+              {% endif %}
+            </div>
+            <div style="flex:1">
+              <input type="file" name="image" id="imageInput" accept="image/*" class="dash-input" style="padding:8px;cursor:pointer" onchange="previewImage(this)">
+              <div style="font-size:11px;color:#6B7280;margin-top:5px">JPG, PNG, WEBP — Max 5MB. This image shows on the website product cards.</div>
+              {% if product and product.image %}
+              <div style="font-size:11px;color:#10B981;margin-top:4px">✅ Current image: {{ product.image.name|cut:"buying_items/" }}</div>
+              <label style="display:flex;align-items:center;gap:6px;margin-top:6px;font-size:12px;color:#EF4444;cursor:pointer">
+                <input type="checkbox" name="clear_image" style="accent-color:#EF4444"> Remove current image
+              </label>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="dash-form-group">
+          <label>Item Name *</label>
+          <input type="text" name="name" value="{{ product.name|default:'' }}" class="dash-input" placeholder="e.g. Men's Ankara Long Sleeve Shirts" required>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="dash-form-group">
+            <label>Category *</label>
+            <select name="category" class="dash-input" required>
+              <option value="">— Select Category —</option>
+              {% for val, label, emoji, bg in categories %}
+              <option value="{{ val }}" {% if product.category == val %}selected{% endif %}>{{ emoji }} {{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="dash-form-group">
+            <label>Badge</label>
+            <select name="badge" class="dash-input">
+              <option value="" {% if not product.badge %}selected{% endif %}>None</option>
+              <option value="URGENT" {% if product.badge == 'URGENT' %}selected{% endif %}>🔥 URGENT</option>
+              <option value="HOT"    {% if product.badge == 'HOT'    %}selected{% endif %}>⭐ HOT</option>
+              <option value="NEW"    {% if product.badge == 'NEW'    %}selected{% endif %}>✨ NEW</option>
+            </select>
+          </div>
+          <div class="dash-form-group">
+            <label>We Pay (GH₵) *</label>
+            <input type="number" name="price" value="{{ product.price|default:'' }}" class="dash-input" placeholder="Max price per unit" step="0.01" min="0" required>
+          </div>
+          <div class="dash-form-group">
+            <label>Unit *</label>
+            <input type="text" name="unit" value="{{ product.unit|default:'piece' }}" class="dash-input" placeholder="piece / yard / set / kg">
+          </div>
+          <div class="dash-form-group">
+            <label>Minimum Quantity</label>
+            <input type="number" name="min_qty" value="{{ product.min_qty|default:1 }}" class="dash-input" min="1">
+          </div>
+          <div class="dash-form-group">
+            <label>% Stock Filled (0–100)</label>
+            <input type="number" name="pct_filled" value="{{ product.pct_filled|default:0 }}" class="dash-input" min="0" max="100">
+          </div>
+        </div>
+
+        <div class="dash-form-group">
+          <label>Description</label>
+          <textarea name="description" class="dash-input" rows="3" placeholder="What types, colors, fabrics you accept…" style="resize:vertical">{{ product.description|default:'' }}</textarea>
+        </div>
+
+        <div class="dash-form-group">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+            <input type="checkbox" name="is_active" {% if not product or product.is_active %}checked{% endif %} style="width:16px;height:16px;accent-color:#1B2D6B">
+            <span>Active — visible to sellers on the website</span>
+          </label>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <button type="submit" class="dash-btn dash-btn-primary" style="padding:12px 28px">
+            {% if product %}💾 Save Changes{% else %}✅ Add Buying Item{% endif %}
+          </button>
+          <a href="{% url 'backend:admin-products' %}" class="dash-btn" style="background:#F3F4F6;color:#374151;padding:12px 20px">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function previewImage(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var wrap = document.getElementById('imgPreviewWrap');
+      wrap.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover">';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>
+{% endblock %}

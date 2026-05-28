@@ -1,0 +1,382 @@
+{% extends 'backend/base-dashboard.html' %}
+{% block title %}Buying Items — Avefon Admin
+<!-- ===== DELETE CONFIRM MODAL ===== -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(17,30,74,0.65);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:12px;padding:28px 24px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
+    <div style="width:56px;height:56px;background:#FEE2E2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🗑</div>
+    <h3 style="font-size:17px;font-weight:700;color:#111E4A;margin-bottom:8px">Delete Buying Item?</h3>
+    <p style="font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:6px">
+      You are about to delete:
+    </p>
+    <p id="deleteItemName" style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:20px;padding:8px;background:#FEF2F2;border-radius:6px"></p>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:20px">This action cannot be undone. All related data will be removed.</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideDeleteModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        Cancel
+      </button>
+      <button id="confirmDeleteBtn" onclick="submitDelete()" style="flex:1;padding:11px;border:none;background:#EF4444;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">
+        Yes, Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _deleteForm = null;
+
+function confirmDelete(btn) {
+  var name = btn.getAttribute('data-name');
+  var form = btn.closest('form');
+  _deleteForm = form;
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  _deleteForm = null;
+}
+
+function submitDelete() {
+  if (_deleteForm) {
+    _deleteForm.onsubmit = null;
+    _deleteForm.submit();
+  }
+}
+
+// Close on backdrop click
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) hideDeleteModal();
+});
+</script>
+
+{% endblock %}
+{% block sidebar_role %}⚙️ Admin Panel
+<!-- ===== DELETE CONFIRM MODAL ===== -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(17,30,74,0.65);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:12px;padding:28px 24px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
+    <div style="width:56px;height:56px;background:#FEE2E2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🗑</div>
+    <h3 style="font-size:17px;font-weight:700;color:#111E4A;margin-bottom:8px">Delete Buying Item?</h3>
+    <p style="font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:6px">
+      You are about to delete:
+    </p>
+    <p id="deleteItemName" style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:20px;padding:8px;background:#FEF2F2;border-radius:6px"></p>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:20px">This action cannot be undone. All related data will be removed.</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideDeleteModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        Cancel
+      </button>
+      <button id="confirmDeleteBtn" onclick="submitDelete()" style="flex:1;padding:11px;border:none;background:#EF4444;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">
+        Yes, Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _deleteForm = null;
+
+function confirmDelete(btn) {
+  var name = btn.getAttribute('data-name');
+  var form = btn.closest('form');
+  _deleteForm = form;
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  _deleteForm = null;
+}
+
+function submitDelete() {
+  if (_deleteForm) {
+    _deleteForm.onsubmit = null;
+    _deleteForm.submit();
+  }
+}
+
+// Close on backdrop click
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) hideDeleteModal();
+});
+</script>
+
+{% endblock %}
+{% block user_role_label %}Administrator
+<!-- ===== DELETE CONFIRM MODAL ===== -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(17,30,74,0.65);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:12px;padding:28px 24px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
+    <div style="width:56px;height:56px;background:#FEE2E2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🗑</div>
+    <h3 style="font-size:17px;font-weight:700;color:#111E4A;margin-bottom:8px">Delete Buying Item?</h3>
+    <p style="font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:6px">
+      You are about to delete:
+    </p>
+    <p id="deleteItemName" style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:20px;padding:8px;background:#FEF2F2;border-radius:6px"></p>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:20px">This action cannot be undone. All related data will be removed.</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideDeleteModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        Cancel
+      </button>
+      <button id="confirmDeleteBtn" onclick="submitDelete()" style="flex:1;padding:11px;border:none;background:#EF4444;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">
+        Yes, Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _deleteForm = null;
+
+function confirmDelete(btn) {
+  var name = btn.getAttribute('data-name');
+  var form = btn.closest('form');
+  _deleteForm = form;
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  _deleteForm = null;
+}
+
+function submitDelete() {
+  if (_deleteForm) {
+    _deleteForm.onsubmit = null;
+    _deleteForm.submit();
+  }
+}
+
+// Close on backdrop click
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) hideDeleteModal();
+});
+</script>
+
+{% endblock %}
+{% block page_title %}Buying Items
+<!-- ===== DELETE CONFIRM MODAL ===== -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(17,30,74,0.65);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:12px;padding:28px 24px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
+    <div style="width:56px;height:56px;background:#FEE2E2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🗑</div>
+    <h3 style="font-size:17px;font-weight:700;color:#111E4A;margin-bottom:8px">Delete Buying Item?</h3>
+    <p style="font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:6px">
+      You are about to delete:
+    </p>
+    <p id="deleteItemName" style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:20px;padding:8px;background:#FEF2F2;border-radius:6px"></p>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:20px">This action cannot be undone. All related data will be removed.</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideDeleteModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        Cancel
+      </button>
+      <button id="confirmDeleteBtn" onclick="submitDelete()" style="flex:1;padding:11px;border:none;background:#EF4444;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">
+        Yes, Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _deleteForm = null;
+
+function confirmDelete(btn) {
+  var name = btn.getAttribute('data-name');
+  var form = btn.closest('form');
+  _deleteForm = form;
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  _deleteForm = null;
+}
+
+function submitDelete() {
+  if (_deleteForm) {
+    _deleteForm.onsubmit = null;
+    _deleteForm.submit();
+  }
+}
+
+// Close on backdrop click
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) hideDeleteModal();
+});
+</script>
+
+{% endblock %}
+{% block sidebar_nav %}
+<div class="dash-nav-section">Overview</div>
+<a href="{% url 'backend:admin-dashboard' %}" class="dash-nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+<div class="dash-nav-section">Management</div>
+<a href="{% url 'backend:admin-sellers' %}" class="dash-nav-link"><i class="fas fa-users"></i> All Sellers</a>
+<a href="{% url 'backend:admin-offers' %}" class="dash-nav-link"><i class="fas fa-tags"></i> All Offers</a>
+<a href="{% url 'backend:admin-products' %}" class="dash-nav-link active"><i class="fas fa-box-open"></i> Buying Items</a>
+<a href="{% url 'backend:add-product' %}" class="dash-nav-link" style="color:#D4AF37"><i class="fas fa-plus-circle"></i> Add New Item</a>
+<a href="{% url 'backend:create-admin' %}" class="dash-nav-link" style="color:#D4AF37"><i class="fas fa-user-shield"></i> Create Admin</a>
+<div class="dash-nav-section">Account</div>
+<a href="{% url 'backend:edit-profile' %}" class="dash-nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
+<a href="{% url 'backend:change-password' %}" class="dash-nav-link"><i class="fas fa-lock"></i> Change Password</a>
+<a href="#" onclick="showLogoutModal();return false" class="dash-nav-link" style="color:#F87171"><i class="fas fa-sign-out-alt"></i> Logout</a>
+
+<!-- ===== DELETE CONFIRM MODAL ===== -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(17,30,74,0.65);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:12px;padding:28px 24px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
+    <div style="width:56px;height:56px;background:#FEE2E2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🗑</div>
+    <h3 style="font-size:17px;font-weight:700;color:#111E4A;margin-bottom:8px">Delete Buying Item?</h3>
+    <p style="font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:6px">
+      You are about to delete:
+    </p>
+    <p id="deleteItemName" style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:20px;padding:8px;background:#FEF2F2;border-radius:6px"></p>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:20px">This action cannot be undone. All related data will be removed.</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideDeleteModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        Cancel
+      </button>
+      <button id="confirmDeleteBtn" onclick="submitDelete()" style="flex:1;padding:11px;border:none;background:#EF4444;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">
+        Yes, Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _deleteForm = null;
+
+function confirmDelete(btn) {
+  var name = btn.getAttribute('data-name');
+  var form = btn.closest('form');
+  _deleteForm = form;
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  _deleteForm = null;
+}
+
+function submitDelete() {
+  if (_deleteForm) {
+    _deleteForm.onsubmit = null;
+    _deleteForm.submit();
+  }
+}
+
+// Close on backdrop click
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) hideDeleteModal();
+});
+</script>
+
+{% endblock %}
+{% block dashboard_content %}
+<div class="dash-card">
+  <div class="dash-card-head">
+    <div class="dash-card-title"><i class="fas fa-box-open"></i> Items Avefon Is Buying ({{ products|length }})</div>
+    <a href="{% url 'backend:add-product' %}" class="dash-card-action" style="background:#D4AF37;color:#111E4A">+ Add New Item</a>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead><tr><th>#</th><th>Item Name</th><th>Category</th><th>We Pay</th><th>Unit</th><th>Min Qty</th><th>Badge</th><th>Active</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for p in products %}
+        <tr>
+          <td style="color:#6B7280">{{ p.id|default:p.id }}</td>
+          <td>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:44px;height:44px;border-radius:6px;overflow:hidden;flex-shrink:0;background:{{ p.bg }};display:flex;align-items:center;justify-content:center">
+                {% if p.image %}
+                <img src="{{ p.image.url }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover">
+                {% else %}
+                <span style="font-size:22px">{{ p.emoji }}</span>
+                {% endif %}
+              </div>
+              <strong>{{ p.name }}</strong>
+            </div>
+          </td>
+          <td><span class="badge badge-info">{{ p.category|default:p.cat }}</span></td>
+          <td><strong style="color:#1B2D6B">GH₵ {{ p.price }}</strong></td>
+          <td style="color:#6B7280">{{ p.unit }}</td>
+          <td>{{ p.min_qty }}</td>
+          <td>
+            {% with b=p.badge %}
+            {% if b == 'URGENT' %}<span class="badge badge-danger">🔥 URGENT</span>
+            {% elif b == 'HOT' %}<span class="badge badge-warning">⭐ HOT</span>
+            {% elif b == 'NEW' %}<span class="badge badge-success">✨ NEW</span>
+            {% else %}<span style="color:#9CA3AF;font-size:12px">—</span>{% endif %}
+            {% endwith %}
+          </td>
+          <td>
+            {% if p.is_active %}<span class="badge badge-success">Active</span>
+            {% else %}<span class="badge badge-danger">Hidden</span>{% endif %}
+          </td>
+          <td>
+            <div style="display:flex;gap:6px">
+              <a href="{% url 'backend:edit-product' p.id %}" style="font-size:12px;font-weight:600;color:#1B2D6B;background:#EEF1FB;padding:4px 10px;border-radius:4px;text-decoration:none">✏️ Edit</a>
+              <form method="POST" action="{% url 'backend:delete-product' p.id %}" onsubmit="return false" class="delete-form">
+                {% csrf_token %}
+                <button type="button" onclick="confirmDelete(this)" data-name="{{ p.name }}" style="font-size:12px;font-weight:600;color:#fff;background:#EF4444;padding:4px 10px;border-radius:4px;border:none;cursor:pointer">🗑 Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== DELETE CONFIRM MODAL ===== -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(17,30,74,0.65);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:12px;padding:28px 24px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25)">
+    <div style="width:56px;height:56px;background:#FEE2E2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🗑</div>
+    <h3 style="font-size:17px;font-weight:700;color:#111E4A;margin-bottom:8px">Delete Buying Item?</h3>
+    <p style="font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:6px">
+      You are about to delete:
+    </p>
+    <p id="deleteItemName" style="font-size:14px;font-weight:700;color:#EF4444;margin-bottom:20px;padding:8px;background:#FEF2F2;border-radius:6px"></p>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:20px">This action cannot be undone. All related data will be removed.</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideDeleteModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        Cancel
+      </button>
+      <button id="confirmDeleteBtn" onclick="submitDelete()" style="flex:1;padding:11px;border:none;background:#EF4444;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">
+        Yes, Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+var _deleteForm = null;
+
+function confirmDelete(btn) {
+  var name = btn.getAttribute('data-name');
+  var form = btn.closest('form');
+  _deleteForm = form;
+  document.getElementById('deleteItemName').textContent = name;
+  document.getElementById('deleteModal').style.display = 'flex';
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  _deleteForm = null;
+}
+
+function submitDelete() {
+  if (_deleteForm) {
+    _deleteForm.onsubmit = null;
+    _deleteForm.submit();
+  }
+}
+
+// Close on backdrop click
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) hideDeleteModal();
+});
+</script>
+
+{% endblock %}

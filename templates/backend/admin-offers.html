@@ -1,0 +1,56 @@
+{% extends 'backend/base-dashboard.html' %}
+{% block title %}All Offers — Avefon Admin{% endblock %}
+{% block sidebar_role %}⚙️ Admin Panel{% endblock %}
+{% block user_role_label %}Administrator{% endblock %}
+{% block page_title %}All Seller Offers{% endblock %}
+{% block sidebar_nav %}
+<div class="dash-nav-section">Overview</div>
+<a href="{% url 'backend:admin-dashboard' %}" class="dash-nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+<div class="dash-nav-section">Management</div>
+<a href="{% url 'backend:admin-sellers' %}" class="dash-nav-link"><i class="fas fa-users"></i> All Sellers</a>
+<a href="{% url 'backend:admin-offers' %}" class="dash-nav-link active"><i class="fas fa-tags"></i> All Offers</a>
+<a href="{% url 'backend:admin-products' %}" class="dash-nav-link"><i class="fas fa-box-open"></i> Buying Items</a>
+<div class="dash-nav-section">Account</div>
+<a href="{% url 'backend:edit-profile' %}" class="dash-nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
+<a href="{% url 'backend:change-password' %}" class="dash-nav-link"><i class="fas fa-lock"></i> Change Password</a>
+<a href="{% url 'frontend:logout' %}" class="dash-nav-link" style="color:#F87171"><i class="fas fa-sign-out-alt"></i> Logout</a>
+{% endblock %}
+{% block dashboard_content %}
+<div class="dash-card">
+  <div class="dash-card-head">
+    <div class="dash-card-title"><i class="fas fa-tags"></i> All Offers ({{ offers|length }})</div>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead><tr><th>Ref</th><th>Seller</th><th>Item</th><th>Qty</th><th>Price</th><th>Bank</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>
+        {% for offer in offers %}
+        <tr>
+          <td><strong style="color:#1B2D6B">{{ offer.ref }}</strong></td>
+          <td>{{ offer.seller_name }}<br><span style="font-size:11px;color:#6B7280">{{ offer.seller_phone }}</span></td>
+          <td>{{ offer.item_name }}</td>
+          <td>{{ offer.qty }}</td>
+          <td><strong>GH₵ {{ offer.total }}</strong></td>
+          <td style="font-size:12px;color:#6B7280">{{ offer.bank }}</td>
+          <td>
+            <form method="POST" action="{% url 'backend:update-offer-status' offer.ref %}">
+              {% csrf_token %}
+              <select name="status" onchange="this.form.submit()" style="border:1px solid #E0E4EF;border-radius:4px;padding:4px 8px;font-size:12px;font-family:inherit">
+                <option value="pending" {% if offer.status == 'pending' %}selected{% endif %}>⏳ Pending</option>
+                <option value="approved" {% if offer.status == 'approved' %}selected{% endif %}>✅ Approved</option>
+                <option value="received" {% if offer.status == 'received' %}selected{% endif %}>📦 Received</option>
+                <option value="paid" {% if offer.status == 'paid' %}selected{% endif %}>💰 Paid</option>
+                <option value="rejected" {% if offer.status == 'rejected' %}selected{% endif %}>❌ Rejected</option>
+              </select>
+            </form>
+          </td>
+          <td><a href="{% url 'backend:offer-detail' offer.ref %}" style="font-size:12px;color:#1B2D6B;font-weight:600">View →</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="8" style="text-align:center;padding:32px;color:#6B7280">No offers submitted yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

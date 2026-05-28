@@ -1,0 +1,132 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}{{ item.name }} — Avefon Trade Ltd{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;padding:32px 0 60px">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav style="font-size:13px;color:#6B7280;margin-bottom:20px;display:flex;align-items:center;gap:6px">
+      <a href="{% url 'frontend:index' %}" style="color:#1B2D6B">Home</a> ›
+      <a href="{% url 'frontend:product-listing' %}" style="color:#1B2D6B">Buying List</a> ›
+      <span>{{ item.name }}</span>
+    </nav>
+
+    <!-- Main detail area -->
+    <div style="background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(27,45,107,0.1);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:0">
+
+      <!-- Left: Image & emoji display -->
+      <div style="background:{{ item.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 40px;position:relative;min-height:460px">
+        {% if item.badge %}
+        <span style="position:absolute;top:16px;left:16px;background:{% if item.badge == 'URGENT' %}#E53935{% elif item.badge == 'HOT' %}#D4AF37{% else %}#2E7D32{% endif %};color:{% if item.badge == 'HOT' %}#111E4A{% else %}#fff{% endif %};font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px">
+          {% if item.badge == 'URGENT' %}🔥 URGENT{% elif item.badge == 'HOT' %}⭐ HOT{% else %}✨ NEW{% endif %}
+        </span>
+        {% endif %}
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width:100%;height:100%;object-fit:cover;max-height:360px">
+        {% else %}
+        <div style="font-size:120px;line-height:1;margin-bottom:16px">{{ item.emoji }}</div>
+        {% endif %}
+        <div style="font-size:13px;color:#6B7280;text-align:center;margin-top:8px">{{ item.get_category_display|default:item.cat }} Category</div>
+
+        <!-- Thumbnail strip -->
+        <div style="display:flex;gap:8px;margin-top:16px">
+          <div style="width:56px;height:56px;border-radius:8px;border:2px solid #1B2D6B;background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer">
+            {% if item.image %}<img src="{{ item.image.url }}" style="width:100%;height:100%;object-fit:cover">{% else %}<span style="font-size:24px">{{ item.emoji }}</span>{% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Details -->
+      <div style="padding:36px 32px">
+        <h1 style="font-size:22px;font-weight:700;color:#1B2D6B;margin-bottom:8px;line-height:1.3">{{ item.name }}</h1>
+        <div style="color:#D4AF37;font-size:14px;margin-bottom:4px">★★★★★ <span style="color:#6B7280;font-size:12px">({{ item.pct }} sellers submitted)</span></div>
+
+        <div style="background:#EEF1FB;border-radius:10px;padding:16px;margin:18px 0">
+          <div style="font-size:11px;color:#6B7280;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px">Avefon Pays Up To</div>
+          <div style="font-size:36px;font-weight:700;color:#1B2D6B;line-height:1">GH₵ {{ item.price }}</div>
+          <div style="font-size:13px;color:#6B7280;margin-top:4px">per {{ item.unit }}</div>
+        </div>
+
+        <!-- Key info grid -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+          <div style="background:#F5F6FA;border-radius:8px;padding:12px">
+            <div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Minimum Quantity</div>
+            <div style="font-size:15px;font-weight:700;color:#1B2D6B">{{ item.min_qty }} {{ item.unit }}(s)</div>
+          </div>
+          <div style="background:#F5F6FA;border-radius:8px;padding:12px">
+            <div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Category</div>
+            <div style="font-size:15px;font-weight:700;color:#1B2D6B">{{ item.cat|title }}</div>
+          </div>
+          <div style="background:#F5F6FA;border-radius:8px;padding:12px">
+            <div style="font-size:10px;color:#6B7280;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Stock Needed</div>
+            <div style="font-size:15px;font-weight:700;color:#1B2D6B">{{ item.pct }}% filled</div>
+            <div style="height:4px;background:#eee;border-radius:2px;margin-top:6px;overflow:hidden">
+              <div style="height:100%;width:{{ item.pct }}%;background:#E53935;border-radius:2px"></div>
+            </div>
+          </div>
+          <div style="background:#FDF6DC;border-radius:8px;padding:12px;border:1px solid rgba(212,175,55,0.3)">
+            <div style="font-size:10px;color:#8A7010;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px">Payment</div>
+            <div style="font-size:13px;font-weight:700;color:#8A7010">Within 24 hours</div>
+            <div style="font-size:11px;color:#8A7010">After goods receipt</div>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div style="margin-bottom:20px">
+          <h3 style="font-size:13px;font-weight:700;color:#1B2D6B;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px">What We Accept</h3>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li style="font-size:13px;color:#4B5563;padding:5px 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid #F3F4F6"><span style="color:#2E7D32">✓</span> Brand new items only</li>
+            <li style="font-size:13px;color:#4B5563;padding:5px 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid #F3F4F6"><span style="color:#2E7D32">✓</span> Wholesale / bulk lots welcome</li>
+            <li style="font-size:13px;color:#4B5563;padding:5px 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid #F3F4F6"><span style="color:#2E7D32">✓</span> Factory direct accepted</li>
+            <li style="font-size:13px;color:#4B5563;padding:5px 0;display:flex;align-items:center;gap:8px"><span style="color:#2E7D32">✓</span> All sizes and colors considered</li>
+          </ul>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <a href="{% url 'frontend:sell-offer-item' item.id %}" class="av-submit" style="text-decoration:none;text-align:center;display:block;font-size:15px;padding:14px">
+            🏷 Sell This to Avefon →
+          </a>
+          <a href="{% url 'frontend:product-listing' %}" style="display:block;text-align:center;padding:12px;border:1px solid #1B2D6B;border-radius:6px;color:#1B2D6B;font-weight:600;font-size:14px;text-decoration:none">
+            ← Browse More Items
+          </a>
+        </div>
+
+        <!-- How it works box -->
+        <div style="background:#FDF6DC;border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:14px;margin-top:16px">
+          <div style="font-size:12px;font-weight:700;color:#8A7010;margin-bottom:8px">💡 How it works</div>
+          <div style="font-size:12px;color:#8A7010;line-height:1.7">
+            Register → Submit offer → Deliver goods → Get paid within 24 hours directly to your bank or Mobile Money account.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Items -->
+    {% if related %}
+    <div style="margin-top:40px">
+      <h2 style="font-size:18px;font-weight:700;color:#1B2D6B;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+        🔗 Related Items We Buy
+        <div style="flex:1;height:1px;background:#E0E4EF"></div>
+      </h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px">
+        {% for r in related %}
+        <a href="{% url 'frontend:product-detail' r.id %}" style="background:#fff;border:1px solid #E0E4EF;border-radius:10px;overflow:hidden;text-decoration:none;transition:all 0.25s;display:block" class="product-card">
+          <div style="height:120px;background:{{ r.bg }};display:flex;align-items:center;justify-content:center;overflow:hidden">
+            {% if r.image %}<img src="{{ r.image.url }}" alt="{{ r.name }}" style="width:100%;height:100%;object-fit:cover">{% else %}<span style="font-size:44px">{{ r.emoji }}</span>{% endif %}
+          </div>
+          <div style="padding:12px">
+            <div style="font-size:12px;color:#1A1A2E;font-weight:500;margin-bottom:5px;line-height:1.4">{{ r.name }}</div>
+            <div style="font-size:16px;font-weight:700;color:#1B2D6B">GH₵ {{ r.price }}</div>
+            <div style="font-size:10px;color:#6B7280">/ {{ r.unit }}</div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</main>
+{% endblock %}

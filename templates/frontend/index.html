@@ -1,0 +1,528 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+
+{% block title %} Avefon Trade Ltd | Ghana's Trusted Clothing Buyer {% endblock %}
+
+{% block content %}
+
+    <!-- ===================== MAIN CONTENT ===================== -->
+    <main>
+      <div class="container">
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero-section" aria-label="Featured promotions">
+          <!-- Category Sidebar -->
+          <aside class="cat-sidebar" aria-label="Product categories">
+            <div class="cat-sidebar-head">🛒 Items We Buy</div>
+            <a class="cat-sidebar-item" href="#">
+              <span class="cat-icon-wrap" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#EEF1FB;font-size:16px;flex-shrink:0">👔</span>
+              <span>Men's Wear</span>
+              <span class="cat-sidebar-arrow">›</span>
+            </a>
+            <a class="cat-sidebar-item" href="#">
+              <span class="cat-icon-wrap" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#FDE8F5;font-size:16px;flex-shrink:0">👗</span>
+              <span>Women's Clothing</span>
+              <span class="cat-sidebar-arrow">›</span>
+            </a>
+            <a class="cat-sidebar-item" href="#">
+              <span class="cat-icon-wrap" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#FDF6DC;font-size:16px;flex-shrink:0">🧣</span>
+              <span>Kente &amp; Traditional</span>
+              <span class="cat-sidebar-arrow">›</span>
+            </a>
+            <a class="cat-sidebar-item" href="#">
+              <span class="cat-icon-wrap" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#EEF1FB;font-size:16px;flex-shrink:0">🧵</span>
+              <span>Fabrics &amp; Textiles</span>
+              <span class="cat-sidebar-arrow">›</span>
+            </a>
+            
+            <a class="cat-sidebar-item" href="#">
+              <span class="cat-icon-wrap" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#E8F5E9;font-size:16px;flex-shrink:0">📦</span>
+              <span>Wholesale Lots</span>
+              <span class="cat-sidebar-arrow">›</span>
+            </a>
+            <a class="cat-sidebar-item" href="#">
+              <span class="cat-icon-wrap" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#FDF6DC;font-size:16px;flex-shrink:0">🏵</span>
+              <span>Traditional Wear</span>
+              <span class="cat-sidebar-arrow">›</span>
+            </a>
+            <a class="cat-sidebar-item" href="#">
+              <span class="cat-icon-wrap" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:#EEF1FB;font-size:16px;flex-shrink:0">🪡</span>
+              <span>Smock &amp; Fugu</span>
+              <span class="cat-sidebar-arrow">›</span>
+            </a>
+          </aside>
+
+          <!-- Hero Slider -->
+          <div class="hero-slider-wrap">
+            <div
+              class="hero-slider"
+              role="region"
+              aria-label="Promotional slides"
+              aria-live="polite"
+            >
+                            <div class="hero-slides" id="heroSlides">
+                <!-- Slide 1 -->
+                <div class="hero-slide" aria-label="We Buy Quality Clothes">
+                  <div class="slide-bg">
+                    
+                    <div class="slide-bg-overlay"></div>
+                  </div>
+                  <div class="slide-content">
+                    <span class="slide-tag">Avefon Trade Ltd</span>
+                    <h2 class="slide-title">We Buy Quality Clothes.<br>You Get Paid.</h2>
+                    <p class="slide-sub">Post your clothing items, submit your offer, and receive payment straight to your bank account within 24 hours.</p>
+                    <a href="{% url 'frontend:vendor-register' %}" class="slide-cta" >Start Selling to Us →</a>
+                  </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="hero-slide" aria-label="Ankara Kente Dashiki Wanted">
+                  <div class="slide-bg">
+                    <img
+                      src="{% static 'frontend/images/ankara.jpg' %}"
+                      alt="Surface Laptop promotion"
+                      width="760"
+                      height="537"
+                      fetchpriority="high"
+                      srcset="
+                        {% static 'frontend/images/Ankara-700x495.jpg.webp' %} 700w,
+                        {% static 'frontend/images/Ankara.jpg.webp' %}         760w,
+                        {% static 'frontend/images/Ankara-430x304.jpg.webp' %} 430w
+                      "
+                      sizes="(max-width:768px) 100vw, calc(100vw - 240px)"
+                    />
+                    <div class="slide-bg-overlay"></div>
+                  </div>
+                  <div class="slide-content">
+                    <span class="slide-tag">Verified Sellers Only</span>
+                    <h2 class="slide-title">Ankara, Kente &amp;<br>Dashiki Wanted.</h2>
+                    <p class="slide-sub">Manufacturers, wholesalers &amp; individual sellers welcome. Submit your offer today and get paid fast.</p>
+                    <a href="{% url 'frontend:vendor-register' %}" class="slide-cta" >Browse Buying List →</a>
+                  </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="hero-slide" aria-label="GHC 3M Paid to Sellers">
+                  <div class="slide-bg">
+                   
+                    <div class="slide-bg-overlay"></div>
+                  </div>
+                  <div class="slide-content">
+                    <span class="slide-tag">GH₵ 3M+ Paid to Sellers</span>
+                    <h2 class="slide-title">Ghana's Most Trusted<br>Clothing Buyer.</h2>
+                    <p class="slide-sub">Join 600+ verified sellers. Fast payment, direct to your bank or Mobile Money account.</p>
+                    <a href="{% url 'frontend:vendor-register' %}" class="slide-cta" >Register &amp; Sell Now →</a>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                class="slider-prev"
+                id="sliderPrev"
+                aria-label="Previous slide"
+              >
+                ‹
+              </button>
+              <button
+                class="slider-next"
+                id="sliderNext"
+                aria-label="Next slide"
+              >
+                ›
+              </button>
+              <div
+                class="slider-dots"
+                id="sliderDots"
+                role="tablist"
+                aria-label="Slide navigation"
+              ></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PROMO STRIP ===== -->
+        <div class="promo-strip" role="list">
+          <div class="promo-item" role="listitem">
+            <span class="promo-icon">🚚</span>
+            <div>
+              <p class="promo-title">Fast Payment</p>
+              <p class="promo-sub">Within 24hrs of goods receipt</p>
+            </div>
+          </div>
+          <div class="promo-item" role="listitem">
+            <span class="promo-icon">✅</span>
+            <div>
+              <p class="promo-title">Verified Sellers</p>
+              <p class="promo-sub">Phone-verified accounts only</p>
+            </div>
+          </div>
+          <div class="promo-item" role="listitem">
+            <span class="promo-icon">🔄</span>
+            <div>
+              <p class="promo-title">Bulk Welcome</p>
+              <p class="promo-sub">Wholesale &amp; factory lots</p>
+            </div>
+          </div>
+          <div class="promo-item" role="listitem">
+            <span class="promo-icon">🔒</span>
+            <div>
+              <p class="promo-title">Bank Transfer</p>
+              <p class="promo-sub">GH₵ direct to your account</p>
+            </div>
+          </div>
+        </div>
+
+        
+        <!-- HOW TO SELL TO AVEFON -->
+        <div class="av-how-banner">
+          <div>
+            <h3>How to <span>Sell to Avefon</span></h3>
+            <p>We buy clothing from manufacturers, wholesalers &amp; individuals. Register, submit your offer, deliver the goods — and we pay you directly.</p>
+          </div>
+          <div class="av-how-steps">
+            <div class="av-how-step"><div class="av-how-num">1</div><div class="av-how-step-t">Register</div><div class="av-how-step-s">Phone verify</div></div>
+            <div class="av-how-step"><div class="av-how-num">2</div><div class="av-how-step-t">Browse &amp; Offer</div><div class="av-how-step-s">Pick items</div></div>
+            <div class="av-how-step"><div class="av-how-num">3</div><div class="av-how-step-t">Deliver Goods</div><div class="av-how-step-s">To our warehouse</div></div>
+            <div class="av-how-step"><div class="av-how-num" style="background:#D4AF37;color:#111E4A">4</div><div class="av-how-step-t">Get Paid 💰</div><div class="av-how-step-s">24hrs to bank</div></div>
+          </div>
+        </div>
+
+        <!-- ===== URGENT BUYS ===== -->
+        <section class="section" aria-labelledby="flash-deals-title" id="avFlashSection">
+          <div class="section-inner">
+            <div class="section-head">
+              <div class="section-head-left">
+                <span class="section-badge">🔥 Urgent Buys — Needed Now!</span>
+                <div class="countdown" aria-label="Countdown timer">
+                  <span class="cd-block" id="cdH">00</span>
+                  <span class="cd-sep">:</span>
+                  <span class="cd-block" id="cdM">00</span>
+                  <span class="cd-sep">:</span>
+                  <span class="cd-block" id="cdS">00</span>
+                </div>
+                <span class="cd-ends">Prices valid today only!</span>
+              </div>
+              <a href="{% url 'frontend:product-listing' %}?badge=URGENT" class="see-all-link">View All ›</a>
+            </div>
+            <ul class="products-grid" role="list" id="avFlashGrid">
+              {% for item in urgent_items %}
+              <li class="product-card" role="listitem" style="position:relative">
+                <span class="product-card-badge badge-sale">{{ item.badge }}</span>
+                <button class="product-wishlist" aria-label="Save item">🤍</button>
+                <a href="{% url 'frontend:product-detail' item.id %}" class="product-img-wrap">
+                  <div style="width:100%;height:220px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:{{ item.bg }}">
+                  {% if item.image %}
+                  <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width:100%;height:100%;object-fit:cover">
+                  {% else %}
+                  <span style="font-size:64px">{{ item.emoji }}</span>
+                  {% endif %}
+                </div>
+                </a>
+                <div class="product-info">
+                  <h3 class="product-name"><a href="{% url 'frontend:product-detail' item.id %}">{{ item.name }}</a></h3>
+                  <div class="product-rating"><div class="stars">★★★★★</div><span class="review-count">({{ item.pct }} sellers)</span></div>
+                  <div class="product-price-row">
+                    <span style="font-size:10px;color:#6B7280;display:block;margin-bottom:2px">We pay up to</span>
+                    <span class="price-current">GH₵ {{ item.price }}</span>
+                    <span style="font-size:11px;color:#6B7280">/ {{ item.unit }}</span>
+                  </div>
+                </div>
+                <div class="product-actions">
+                  <a href="{% url 'frontend:sell-offer-item' item.id %}" class="action-btn action-btn-cart">🏷 Sell This to Us</a>
+                  <a href="{% url 'frontend:product-detail' item.id %}" class="action-btn action-btn-quick">Details</a>
+                </div>
+              </li>
+              {% empty %}
+              <li style="padding:40px;color:#6B7280;font-size:14px;text-align:center;width:100%">No urgent items right now — check back soon!</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===== CATEGORY ICONS ===== -->
+        <section class="section" aria-labelledby="shop-by-category-title">
+          <div class="section-inner">
+            <div class="section-head">
+              <h2 class="section-title" id="shop-by-category-title">
+                Browse <span>What We Buy</span>
+              </h2>
+              <a href="" class="see-all-link"
+                >See All Items ›</a
+              >
+            </div>
+                        <nav class="cat-grid" aria-label="Clothing categories">
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#EEF1FB;border-radius:12px">👔</div>
+                <span class="cat-tile-label">Men's Wear</span>
+              </a>
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#FDE8F5;border-radius:12px">👗</div>
+                <span class="cat-tile-label">Women's Clothing</span>
+              </a>
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#FDF6DC;border-radius:12px">🧣</div>
+                <span class="cat-tile-label">Kente &amp; Traditional</span>
+              </a>
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#EEF1FB;border-radius:12px">🧵</div>
+                <span class="cat-tile-label">Fabrics &amp; Textiles</span>
+              </a>
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#FDF6DC;border-radius:12px">👜</div>
+                <span class="cat-tile-label">Accessories</span>
+              </a>
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#E8F5E9;border-radius:12px">📦</div>
+                <span class="cat-tile-label">Wholesale Lots</span>
+              </a>
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#FDF6DC;border-radius:12px">🏵</div>
+                <span class="cat-tile-label">Traditional Wear</span>
+              </a>
+              <a href="" class="cat-tile" >
+                <div class="cat-tile-img" style="display:flex;align-items:center;justify-content:center;font-size:34px;width:64px;height:64px;background:#EEF1FB;border-radius:12px">🪡</div>
+                <span class="cat-tile-label">Smock &amp; Fugu</span>
+              </a>
+            </nav>
+          </div>
+        </section>
+
+        <!-- ===== FEATURED BUYING ITEMS ===== -->
+        <section class="section" aria-labelledby="featured-title">
+          <div class="section-inner">
+            <div class="section-head">
+              <div>
+                <h2 class="section-title" id="featured-title">⭐ Featured <span>Buying Items</span></h2>
+                <p class="section-subtitle">Top items Avefon is buying right now — submit your offer today</p>
+              </div>
+              <a href="{% url 'frontend:product-listing' %}" class="see-all-link">View All ›</a>
+            </div>
+            <ul class="products-grid" role="list">
+              {% for item in featured_items %}
+              <li class="product-card" role="listitem" style="position:relative">
+                {% if item.badge %}<span class="product-card-badge badge-{{ item.badge|lower }}">{{ item.badge }}</span>{% endif %}
+                <button class="product-wishlist" aria-label="Save item">🤍</button>
+                <a href="{% url 'frontend:product-detail' item.id %}" class="product-img-wrap">
+                  <div style="width:100%;height:220px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:{{ item.bg }}">
+                  {% if item.image %}
+                  <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width:100%;height:100%;object-fit:cover">
+                  {% else %}
+                  <span style="font-size:64px">{{ item.emoji }}</span>
+                  {% endif %}
+                </div>
+                </a>
+                <div class="product-info">
+                  <h3 class="product-name"><a href="{% url 'frontend:product-detail' item.id %}">{{ item.name }}</a></h3>
+                  <div class="product-rating"><div class="stars">★★★★★</div><span class="review-count">({{ item.pct }} sellers)</span></div>
+                  <div class="product-price-row">
+                    <span style="font-size:10px;color:#6B7280;display:block;margin-bottom:2px">We pay up to</span>
+                    <span class="price-current">GH₵ {{ item.price }}</span>
+                    <span style="font-size:11px;color:#6B7280">/ {{ item.unit }}</span>
+                  </div>
+                </div>
+                <div class="product-actions">
+                  <a href="{% url 'frontend:sell-offer-item' item.id %}" class="action-btn action-btn-cart">🏷 Sell This to Us</a>
+                  <a href="{% url 'frontend:product-detail' item.id %}" class="action-btn action-btn-quick">Details</a>
+                </div>
+              </li>
+              {% empty %}
+              <li style="padding:40px;color:#6B7280;font-size:14px;text-align:center;width:100%">Items loading…</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===== PROMO BANNERS ===== -->
+        <section class="banners-grid" aria-label="Promotional banners">
+          <a href="#" class="banner-card"  style="cursor:pointer">
+            <div style="width:100%;height:100%;min-height:280px;background:linear-gradient(135deg,#1B2D6B 0%,#253D8A 100%);display:flex;align-items:center;justify-content:center;font-size:120px;position:relative;overflow:hidden">
+              👔
+              <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(17,30,74,0.85) 100%)"></div>
+            </div>
+            <div class="banner-overlay" style="position:absolute;bottom:0;left:0;right:0;padding:20px">
+              <p class="banner-tag" style="background:#D4AF37;color:#111E4A;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Urgent Buy</p>
+              <h3 class="banner-title" style="color:#fff;font-size:20px;font-weight:700;margin-bottom:8px">Men's &amp; Women's Clothing Wanted</h3>
+              <span class="banner-btn" style="background:#D4AF37;color:#111E4A;padding:8px 16px;border-radius:4px;font-size:13px;font-weight:700;display:inline-block">Sell to Us →</span>
+            </div>
+          </a>
+          <a href="#" class="banner-card"  style="cursor:pointer">
+            <div style="width:100%;height:100%;min-height:280px;background:linear-gradient(135deg,#111E4A 0%,#1B2D6B 100%);display:flex;align-items:center;justify-content:center;font-size:120px;position:relative;overflow:hidden">
+              🧣
+              <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(17,30,74,0.85) 100%)"></div>
+            </div>
+            <div class="banner-overlay" style="position:absolute;bottom:0;left:0;right:0;padding:20px">
+              <p class="banner-tag" style="background:#E53935;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Top Prices</p>
+              <h3 class="banner-title" style="color:#fff;font-size:20px;font-weight:700;margin-bottom:8px">Kente &amp; Traditional Fabrics</h3>
+              <span class="banner-btn" style="background:#D4AF37;color:#111E4A;padding:8px 16px;border-radius:4px;font-size:13px;font-weight:700;display:inline-block">Submit Offer →</span>
+            </div>
+          </a>
+        </section>
+
+        
+   
+
+        <!-- ===== FABRICS & KENTE ===== -->
+        <section class="section" aria-labelledby="fabric-title">
+          <div class="section-inner">
+            <div class="section-head">
+              <div>
+                <h2 class="section-title" id="fabric-title">🧵 Fabrics &amp; <span>Kente We Buy</span></h2>
+                <p class="section-subtitle">Quality fabrics, Kente cloth &amp; traditional textiles — all welcome</p>
+              </div>
+              <a href="{% url 'frontend:product-listing-cat' 'fabric' %}" class="see-all-link">See All ›</a>
+            </div>
+            <ul class="products-grid" role="list">
+              {% for item in fabric_items %}
+              <li class="product-card" role="listitem" style="position:relative">
+                {% if item.badge %}<span class="product-card-badge badge-{{ item.badge|lower }}">{{ item.badge }}</span>{% endif %}
+                <button class="product-wishlist" aria-label="Save item">🤍</button>
+                <a href="{% url 'frontend:product-detail' item.id %}" class="product-img-wrap">
+                  <div style="width:100%;height:220px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:{{ item.bg }}">
+                  {% if item.image %}
+                  <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width:100%;height:100%;object-fit:cover">
+                  {% else %}
+                  <span style="font-size:64px">{{ item.emoji }}</span>
+                  {% endif %}
+                </div>
+                </a>
+                <div class="product-info">
+                  <h3 class="product-name"><a href="{% url 'frontend:product-detail' item.id %}">{{ item.name }}</a></h3>
+                  <div class="product-rating"><div class="stars">★★★★★</div><span class="review-count">({{ item.pct }} sellers)</span></div>
+                  <div class="product-price-row">
+                    <span style="font-size:10px;color:#6B7280;display:block;margin-bottom:2px">We pay up to</span>
+                    <span class="price-current">GH₵ {{ item.price }}</span>
+                    <span style="font-size:11px;color:#6B7280">/ {{ item.unit }}</span>
+                  </div>
+                </div>
+                <div class="product-actions">
+                  <a href="{% url 'frontend:sell-offer-item' item.id %}" class="action-btn action-btn-cart">🏷 Sell This to Us</a>
+                  <a href="{% url 'frontend:product-detail' item.id %}" class="action-btn action-btn-quick">Details</a>
+                </div>
+              </li>
+              {% empty %}
+              <li style="padding:40px;color:#6B7280;font-size:14px;text-align:center;width:100%">Items loading…</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===== STATS ===== -->
+        <section class="stats-section" aria-label="Avefon Trade Ltd statistics">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">💰</div>
+              <div class="stat-number" data-count="3" data-suffix="M+ GH₵">
+                0
+              </div>
+              <div class="stat-label">Paid to Sellers</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🏷</div>
+              <div class="stat-number" data-count="16" data-suffix="+ Items">
+                0
+              </div>
+              <div class="stat-label">Items We Buy</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">✅</div>
+              <div class="stat-number" data-count="600" data-suffix="+">0</div>
+              <div class="stat-label">Verified Sellers</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⏱</div>
+              <div class="stat-number" data-count="24" data-suffix=" hrs">
+                0
+              </div>
+              <div class="stat-label">Payment Time</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== APPLIANCES SECTION ===== -->
+        <section class="section" aria-labelledby="appliances-title">
+          <div class="section-inner">
+            <div class="section-head">
+              <h2 class="section-title" id="appliances-title">
+                📦 <span>Wholesale Lots</span> &amp; Bulk Clothing
+              </h2>
+              <a href="" class="see-all-link">View Buying List ›</a>
+            </div>
+            <ul class="products-grid" role="list"></ul>
+          </div>
+        </section>
+
+        <!-- ===== PAYMENT PARTNERS ===== -->
+        <section class="brands-section" aria-labelledby="brands-title">
+          <div class="section-inner">
+            <h2 class="section-title" id="brands-title" style="text-align:center;margin-bottom:20px">
+              We Pay Via <span>These Channels</span>
+            </h2>
+            <div class="brands-grid" style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">🏦</div>
+                <div style="font-size:12px;font-weight:700;color:#1B2D6B">GCB Bank</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">🏦</div>
+                <div style="font-size:12px;font-weight:700;color:#1B2D6B">Ecobank Ghana</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">📱</div>
+                <div style="font-size:12px;font-weight:700;color:#FFCC00">MTN MoMo</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">📱</div>
+                <div style="font-size:12px;font-weight:700;color:#E53935">Vodafone Cash</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">🏦</div>
+                <div style="font-size:12px;font-weight:700;color:#1B2D6B">Absa Bank</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">📱</div>
+                <div style="font-size:12px;font-weight:700;color:#1976D2">AirtelTigo</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">🏦</div>
+                <div style="font-size:12px;font-weight:700;color:#1B2D6B">Fidelity Bank</div>
+              </div>
+              <div style="background:#fff;border:1px solid #E0E4EF;border-radius:8px;padding:14px 20px;text-align:center;min-width:120px">
+                <div style="font-size:24px;margin-bottom:4px">🏦</div>
+                <div style="font-size:12px;font-weight:700;color:#1B2D6B">Zenith Bank</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+<!-- ===================== MOBILE BOTTOM NAV ===================== -->
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+      <div class="bottom-nav-inner">
+        <a
+          href="{% url 'frontend:index' %}"
+          class="bnav-item active"
+          aria-label="Home"
+          aria-current="page"
+        >
+          <span class="bnav-icon">🏠</span>
+          <span>Home</span>
+        </a>
+        <a href="" class="bnav-item" aria-label="Browse">
+          <span class="bnav-icon">🔍</span>
+          <span>Browse</span>
+        </a>
+        <button class="bnav-item" id="bnavMenu" aria-label="Open menu">
+          <span class="bnav-icon">☰</span>
+          <span>Menu</span>
+        </button>
+        <a href="cart.html" class="bnav-item" aria-label="Cart, 5 items">
+          <span class="bnav-icon">🛒</span>
+          <span class="bnav-badge cart-badge">5</span>
+          <span>Cart</span>
+        </a>
+        <a href="login.html" class="bnav-item" aria-label="My account">
+          <span class="bnav-icon">👤</span>
+          <span>Account</span>
+        </a>
+      </div>
+    </nav>
+
+    {% endblock %}

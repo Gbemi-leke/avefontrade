@@ -1,0 +1,163 @@
+{% extends 'backend/base-dashboard.html' %}
+{% block title %}Offer {{ offer.ref }} — Avefon Admin{% endblock %}
+{% block sidebar_role %}⚙️ Admin Panel{% endblock %}
+{% block user_role_label %}Administrator{% endblock %}
+{% block page_title %}Offer Detail{% endblock %}
+{% block sidebar_nav %}
+<div class="dash-nav-section">Overview</div>
+<a href="{% url 'backend:admin-dashboard' %}" class="dash-nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+<div class="dash-nav-section">Management</div>
+<a href="{% url 'backend:admin-sellers' %}" class="dash-nav-link"><i class="fas fa-users"></i> All Sellers</a>
+<a href="{% url 'backend:admin-offers' %}" class="dash-nav-link active"><i class="fas fa-tags"></i> All Offers</a>
+<a href="{% url 'backend:admin-products' %}" class="dash-nav-link"><i class="fas fa-box-open"></i> Buying Items</a>
+<a href="{% url 'backend:add-product' %}" class="dash-nav-link"><i class="fas fa-plus-circle"></i> Add New Item</a>
+<div class="dash-nav-section">Account</div>
+<a href="{% url 'backend:edit-profile' %}" class="dash-nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
+<a href="{% url 'backend:change-password' %}" class="dash-nav-link"><i class="fas fa-lock"></i> Change Password</a>
+<a href="#" onclick="showLogoutModal();return false" class="dash-nav-link" style="color:#F87171"><i class="fas fa-sign-out-alt"></i> Logout</a>
+{% endblock %}
+
+{% block dashboard_content %}
+<div style="max-width:760px">
+  <a href="{% url 'backend:admin-offers' %}" style="font-size:13px;color:#1B2D6B;font-weight:600;display:inline-flex;align-items:center;gap:6px;margin-bottom:16px">
+    ← Back to All Offers
+  </a>
+
+  <div class="dash-card">
+    <div class="dash-card-head" style="flex-wrap:wrap;gap:10px">
+      <div class="dash-card-title"><i class="fas fa-tag"></i> {{ offer.ref }}</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        {% with status=offer.status|default:offer.status %}
+        {% if status == 'paid' %}<span class="badge badge-success" style="font-size:12px;padding:5px 12px">💰 PAID</span>
+        {% elif status == 'approved' %}<span class="badge badge-info" style="font-size:12px;padding:5px 12px">✅ APPROVED</span>
+        {% elif status == 'rejected' %}<span class="badge badge-danger" style="font-size:12px;padding:5px 12px">❌ REJECTED</span>
+        {% elif status == 'received' %}<span class="badge badge-purple" style="font-size:12px;padding:5px 12px">📦 RECEIVED</span>
+        {% else %}<span class="badge badge-warning" style="font-size:12px;padding:5px 12px">⏳ PENDING</span>{% endif %}
+        {% endwith %}
+
+        <!-- WhatsApp Chat Seller Button -->
+        {% with phone=offer.seller_phone %}
+        <a id="waChatBtn" href="#" target="_blank"
+           style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:8px 16px;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Chat Seller on WhatsApp
+        </a>
+        {% endwith %}
+      </div>
+    </div>
+
+    <!-- Main details grid -->
+    <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <!-- Item Details -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #F3F4F6">📦 Item Details</div>
+        <div style="font-size:13px;line-height:2;color:#374151">
+          <div><span style="color:#6B7280">Item:</span> <strong>{{ offer.item_name }}</strong></div>
+          <div><span style="color:#6B7280">Quantity:</span> <strong>{{ offer.quantity|default:offer.qty }}</strong></div>
+          <div><span style="color:#6B7280">Price/Unit:</span> <strong>GH₵ {{ offer.asking_price|default:offer.price }}</strong></div>
+          <div><span style="color:#6B7280">Total Value:</span> <strong style="color:#1B2D6B;font-size:16px">GH₵ {{ offer.total }}</strong></div>
+          {% if offer.condition %}<div><span style="color:#6B7280">Condition:</span> <strong>{{ offer.condition }}</strong></div>{% endif %}
+          {% if offer.description %}<div style="margin-top:6px;font-size:12px;background:#F5F6FA;border-radius:6px;padding:8px;color:#4B5563">{{ offer.description }}</div>{% endif %}
+        </div>
+      </div>
+
+      <!-- Seller Info -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #F3F4F6">👤 Seller Info</div>
+        <div style="font-size:13px;line-height:2;color:#374151">
+          <div><span style="color:#6B7280">Name:</span> <strong>{{ offer.seller_name }}</strong></div>
+          <div><span style="color:#6B7280">Phone:</span>
+            <strong>{{ offer.seller_phone }}</strong>
+            <a id="waPhoneLink" href="#" target="_blank" style="margin-left:8px;font-size:11px;background:#25D366;color:#fff;padding:2px 8px;border-radius:10px;text-decoration:none;font-weight:700">WhatsApp</a>
+          </div>
+          {% if offer.seller_email %}<div><span style="color:#6B7280">Email:</span> <strong>{{ offer.seller_email }}</strong></div>{% endif %}
+          {% if offer.location %}<div><span style="color:#6B7280">Location:</span> <strong>{{ offer.location }}</strong></div>{% endif %}
+        </div>
+      </div>
+
+      <!-- Payment Details -->
+      <div>
+        <div style="font-size:11px;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #F3F4F6">💳 Payment Details</div>
+        <div style="font-size:13px;line-height:2;color:#374151">
+          <div><span style="color:#6B7280">Bank/MoMo:</span> <strong>{{ offer.bank_name|default:offer.bank }}</strong></div>
+          <div><span style="color:#6B7280">Account Name:</span> <strong>{% firstof offer.account_name 'Not provided' %}</strong></div>
+          <div><span style="color:#6B7280">Account Number:</span> <strong>{{ offer.account_number }}</strong></div>
+          {% if offer.branch %}<div><span style="color:#6B7280">Branch:</span> <strong>{{ offer.branch }}</strong></div>{% endif %}
+        </div>
+      </div>
+
+      <!-- Delivery Instructions -->
+      <div style="background:#EEF1FB;border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:700;color:#1B2D6B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">📋 Delivery Instructions</div>
+        <p style="font-size:12px;color:#4B5563;line-height:1.7;margin-bottom:10px">
+          Use the WhatsApp button to discuss delivery with this seller. You can coordinate:
+        </p>
+        <ul style="font-size:12px;color:#4B5563;line-height:1.8;padding-left:16px;margin:0">
+          <li>Warehouse drop-off address</li>
+          <li>Pickup from seller location</li>
+          <li>Delivery schedule & timing</li>
+          <li>Item inspection process</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Status Update -->
+    <div style="padding:16px 20px;border-top:1px solid #F3F4F6;background:#FAFBFE">
+      <form method="POST" action="{% url 'backend:update-offer-status' offer.ref %}" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        {% csrf_token %}
+        <label style="font-size:13px;font-weight:600;color:#374151">Update Status:</label>
+        <select name="status" style="padding:9px 14px;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;font-family:inherit;min-width:160px">
+          <option value="pending"  {% if offer.status == 'pending'  %}selected{% endif %}>⏳ Pending Review</option>
+          <option value="approved" {% if offer.status == 'approved' %}selected{% endif %}>✅ Approved</option>
+          <option value="received" {% if offer.status == 'received' %}selected{% endif %}>📦 Goods Received</option>
+          <option value="paid"     {% if offer.status == 'paid'     %}selected{% endif %}>💰 Paid</option>
+          <option value="rejected" {% if offer.status == 'rejected' %}selected{% endif %}>❌ Rejected</option>
+        </select>
+        <button type="submit" class="dash-btn dash-btn-primary">Update →</button>
+
+        <a id="waMainBtn" href="#" target="_blank"
+           style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;margin-left:auto">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          💬 Chat Seller on WhatsApp
+        </a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+// Build WhatsApp links dynamically from seller phone
+(function(){
+  var rawPhone = "{{ offer.seller_phone }}";
+  var sellerName = "{{ offer.seller_name }}";
+  var itemName = "{{ offer.item_name }}";
+  var ref = "{{ offer.ref }}";
+
+  // Normalise phone: strip spaces, dashes; if starts with 0 replace with 233
+  var phone = rawPhone.replace(/[\s\-\(\)]/g, '');
+  if (phone.startsWith('0')) phone = '233' + phone.slice(1);
+  if (phone.startsWith('+')) phone = phone.slice(1);
+
+  var msg = encodeURIComponent(
+    "Hello " + sellerName + "! 👋\n\n" +
+    "This is the Avefon Trade Ltd buying team.\n\n" +
+    "We've reviewed your offer:\n" +
+    "• Ref: " + ref + "\n" +
+    "• Item: " + itemName + "\n\n" +
+    "We'd like to discuss delivery arrangements. " +
+    "Please let us know your preferred method:\n" +
+    "1️⃣ Drop off at our warehouse\n" +
+    "2️⃣ We pick up from your location\n\n" +
+    "Looking forward to hearing from you! 🇬🇭"
+  );
+
+  var url = 'https://wa.me/' + phone + '?text=' + msg;
+  ['waChatBtn','waMainBtn'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.href = url;
+  });
+  var phoneLink = document.getElementById('waPhoneLink');
+  if(phoneLink) phoneLink.href = 'https://wa.me/' + phone;
+})();
+</script>
+{% endblock %}

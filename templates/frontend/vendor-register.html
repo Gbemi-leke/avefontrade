@@ -1,0 +1,101 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}Register as Seller — Avefon Trade Ltd{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;min-height:80vh;padding:48px 0">
+  <div class="container" style="max-width:580px;margin:0 auto">
+    {% if messages %}{% for msg in messages %}
+    <div style="padding:12px 16px;border-radius:8px;margin-bottom:16px;background:#FFEBEE;color:#B71C1C">{{ msg }}</div>
+    {% endfor %}{% endif %}
+
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(27,45,107,0.12)">
+      <div style="background:linear-gradient(135deg,#1B2D6B,#253D8A);padding:24px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <span style="font-size:32px">🏪</span>
+          <div>
+            <div style="color:#fff;font-size:18px;font-weight:700">Register as a Seller</div>
+            <div style="color:rgba(255,255,255,0.65);font-size:12px">Sell your clothing items to Avefon Trade Ltd</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;margin-top:12px">
+          <div style="background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.3);border-radius:6px;padding:8px 12px;font-size:12px;color:#D4AF37">✅ Phone Verified</div>
+          <div style="background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.3);border-radius:6px;padding:8px 12px;font-size:12px;color:#D4AF37">💰 Paid in 24hrs</div>
+          <div style="background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.3);border-radius:6px;padding:8px 12px;font-size:12px;color:#D4AF37">🔒 Secure Transfer</div>
+        </div>
+      </div>
+      <div style="padding:26px">
+        <form method="POST" id="vendorRegForm">
+          {% csrf_token %}
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+            <div><label class="av-lbl">First Name *</label><input type="text" name="first_name" class="av-input" placeholder="Kwame" required></div>
+            <div><label class="av-lbl">Last Name *</label><input type="text" name="last_name" class="av-input" placeholder="Mensah" required></div>
+          </div>
+          <div style="margin-bottom:14px">
+            <label class="av-lbl">Phone Number *</label>
+            <div style="display:flex;gap:8px">
+              <input type="tel" id="sellerPhone" name="phone" class="av-input" placeholder="+233 XX XXX XXXX" style="flex:1" required>
+              <button type="button" id="sendOtpBtn" class="av-vc-btn">Send Code</button>
+            </div>
+            <div class="av-hint">A 6-digit verification code will be sent to your phone</div>
+          </div>
+          <div style="margin-bottom:14px">
+            <label class="av-lbl">Verification Code *</label>
+            <input type="text" id="otpInput" name="otp_code" class="av-input" placeholder="Enter 6-digit code" required>
+          </div>
+          <div style="margin-bottom:14px"><label class="av-lbl">Username *</label><input type="text" name="username" class="av-input" placeholder="kwame_mensah" required></div>
+          <div style="margin-bottom:14px"><label class="av-lbl">Email Address</label><input type="email" name="email" class="av-input" placeholder="your@email.com"></div>
+          <div style="margin-bottom:14px">
+            <label class="av-lbl">Seller Type</label>
+            <select name="seller_type" class="av-select">
+              <option value="individual">Individual Seller</option>
+              <option value="manufacturer">Clothing Manufacturer</option>
+              <option value="wholesale">Wholesale Distributor</option>
+              <option value="trader">Market Trader</option>
+              <option value="factory">Factory / Mill</option>
+            </select>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px">
+            <div><label class="av-lbl">Password *</label><input type="password" name="password1" class="av-input" placeholder="Min. 6 characters" required></div>
+            <div><label class="av-lbl">Confirm Password *</label><input type="password" name="password2" class="av-input" placeholder="Repeat password" required></div>
+          </div>
+          <div style="margin-bottom:18px">
+            <label style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#6B7280;cursor:pointer">
+              <input type="checkbox" name="agree_terms" required style="accent-color:#1B2D6B;margin-top:2px">
+              I agree to Avefon's <a href="#" style="color:#1B2D6B">Seller Agreement</a> and <a href="#" style="color:#1B2D6B">Terms of Service</a>
+            </label>
+          </div>
+          <button type="submit" class="av-submit">🏪 Create Seller Account</button>
+        </form>
+        <div style="text-align:center;margin-top:14px;font-size:13px;color:#6B7280">
+          Already have an account? <a href="{% url 'frontend:login' %}" style="color:#1B2D6B;font-weight:700">Sign In →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}
+{% block extra_js %}
+<script>
+$('#sendOtpBtn').on('click', function(){
+  var phone = $('#sellerPhone').val().trim();
+  if (!phone) { alert('Enter your phone number first.'); return; }
+  var $b = $(this);
+  $b.text('Sending…').prop('disabled', true);
+  $.ajax({
+    url: "{% url 'backend:send-otp' %}",
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({phone: phone}),
+    headers: {'X-CSRFToken': '{{ csrf_token }}'},
+    success: function(r) {
+      if (r.success) {
+        $b.text('Sent ✓').css('background','#2E7D32');
+        if (r.dev_code) $('#otpInput').val(r.dev_code);
+        setTimeout(function(){ $b.text('Resend').css('background','').prop('disabled', false); }, 30000);
+      }
+    }
+  });
+});
+</script>
+{% endblock %}

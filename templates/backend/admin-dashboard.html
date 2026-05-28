@@ -1,0 +1,105 @@
+{% extends 'backend/base-dashboard.html' %}
+{% block title %}Admin Dashboard — Avefon Trade Ltd{% endblock %}
+{% block sidebar_role %}⚙️ Admin Panel{% endblock %}
+{% block user_role_label %}Administrator{% endblock %}
+{% block page_title %}Admin Dashboard{% endblock %}
+
+{% block sidebar_nav %}
+<div class="dash-nav-section">Overview</div>
+<a href="{% url 'backend:admin-dashboard' %}" class="dash-nav-link active"><i class="fas fa-th-large"></i> Dashboard</a>
+
+<div class="dash-nav-section">Management</div>
+<a href="{% url 'backend:admin-sellers' %}" class="dash-nav-link"><i class="fas fa-users"></i> All Sellers <span class="dash-nav-badge">{{ total_sellers }}</span></a>
+<a href="{% url 'backend:admin-offers' %}" class="dash-nav-link"><i class="fas fa-tags"></i> All Offers <span class="dash-nav-badge">{{ pending_offers }}</span></a>
+<a href="{% url 'backend:admin-products' %}" class="dash-nav-link"><i class="fas fa-box-open"></i> Buying Items</a>
+<a href="{% url 'backend:add-product' %}" class="dash-nav-link" style="color:#D4AF37"><i class="fas fa-plus-circle"></i> Add New Item</a>
+<a href="{% url 'backend:create-admin' %}" class="dash-nav-link" style="color:#D4AF37"><i class="fas fa-user-shield"></i> Create Admin</a>
+
+<div class="dash-nav-section">Account</div>
+<a href="{% url 'backend:edit-profile' %}" class="dash-nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
+<a href="{% url 'backend:change-password' %}" class="dash-nav-link"><i class="fas fa-lock"></i> Change Password</a>
+<a href="#" onclick="showLogoutModal();return false" class="dash-nav-link" style="color:#F87171"><i class="fas fa-sign-out-alt"></i> Logout</a>
+{% endblock %}
+
+{% block dashboard_content %}
+<!-- Stats -->
+<div class="stat-grid">
+  <div class="stat-card">
+    <div class="stat-card-icon" style="background:#EEF1FB">👥</div>
+    <div><div class="stat-val">{{ total_sellers }}</div><div class="stat-label">Verified Sellers</div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card-icon" style="background:#FDF6DC">🏷</div>
+    <div><div class="stat-val">{{ total_offers }}</div><div class="stat-label">Total Offers</div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card-icon" style="background:#FEF3C7">⏳</div>
+    <div><div class="stat-val" style="color:#D97706">{{ pending_offers }}</div><div class="stat-label">Pending Review</div></div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-card-icon" style="background:#D1FAE5">💰</div>
+    <div><div class="stat-val" style="color:#065F46">{{ paid_out }}</div><div class="stat-label">Total Paid Out</div></div>
+  </div>
+</div>
+
+<!-- Recent Offers -->
+<div class="dash-card">
+  <div class="dash-card-head">
+    <div class="dash-card-title"><i class="fas fa-tags"></i> Recent Offers</div>
+    <a href="{% url 'backend:admin-offers' %}" class="dash-card-action">View All →</a>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead><tr>
+        <th>Reference</th><th>Seller</th><th>Item</th><th>Amount</th><th>Bank</th><th>Status</th><th>Action</th>
+      </tr></thead>
+      <tbody>
+        {% for offer in recent_offers %}
+        <tr>
+          <td><strong style="color:#1B2D6B">{{ offer.ref }}</strong></td>
+          <td>{{ offer.seller_name }}</td>
+          <td>{{ offer.item_name }}</td>
+          <td><strong>GH₵ {{ offer.total }}</strong></td>
+          <td style="font-size:12px;color:#6B7280">{{ offer.bank }}</td>
+          <td>
+            {% if offer.status == 'paid' %}<span class="badge badge-success">💰 Paid</span>
+            {% elif offer.status == 'approved' %}<span class="badge badge-info">✅ Approved</span>
+            {% elif offer.status == 'rejected' %}<span class="badge badge-danger">❌ Rejected</span>
+            {% else %}<span class="badge badge-warning">⏳ Pending</span>{% endif %}
+          </td>
+          <td><a href="{% url 'backend:offer-detail' offer.ref %}" style="font-size:12px;color:#1B2D6B;font-weight:600">Review →</a></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" style="text-align:center;padding:32px;color:#6B7280">No offers yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Recent Sellers -->
+<div class="dash-card">
+  <div class="dash-card-head">
+    <div class="dash-card-title"><i class="fas fa-users"></i> Recent Sellers</div>
+    <a href="{% url 'backend:admin-sellers' %}" class="dash-card-action">View All →</a>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead><tr><th>Name</th><th>Username</th><th>Email</th><th>Joined</th><th>Offers</th></tr></thead>
+      <tbody>
+        {% for seller in recent_sellers %}
+        <tr>
+          <td><strong>{{ seller.get_full_name|default:seller.username }}</strong></td>
+          <td style="color:#6B7280">{{ seller.username }}</td>
+          <td style="color:#6B7280">{{ seller.email|default:'—' }}</td>
+          <td style="color:#6B7280;font-size:12px">{{ seller.date_joined|date:"M d, Y" }}</td>
+          <td><span class="badge badge-info">{{ seller.offer_count }}</span></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" style="text-align:center;padding:32px;color:#6B7280">No sellers yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

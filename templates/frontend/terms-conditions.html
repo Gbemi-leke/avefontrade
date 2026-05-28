@@ -1,0 +1,51 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}Terms & Conditions — Avefon Trade Ltd{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;padding:48px 0 80px">
+<div class="container" style="max-width:820px;margin:0 auto">
+
+  <div style="background:linear-gradient(135deg,#1B2D6B,#253D8A);border-radius:12px;padding:36px 40px;margin-bottom:32px;text-align:center">
+    <div style="font-size:40px;margin-bottom:12px">📜</div>
+    <h1 style="color:#fff;font-size:28px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:8px">Terms & Conditions</h1>
+    <p style="color:rgba(255,255,255,0.7);font-size:13px">Avefon Trade Ltd · Last updated: May 2025 · avefontrade.com</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:40px;box-shadow:0 2px 16px rgba(27,45,107,0.08)">
+
+    <div style="background:#FDF6DC;border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:16px;margin-bottom:28px">
+      <p style="font-size:13px;color:#8A7010;margin:0;line-height:1.7">
+        <strong>Please read these Terms and Conditions carefully.</strong> By accessing or using the Avefon Trade Ltd platform, you agree to be bound by these terms. If you disagree with any part, you may not use our services.
+      </p>
+    </div>
+
+    {% for num, title, content in terms %}
+    <div style="margin-bottom:30px">
+      <h2 style="font-size:17px;font-weight:700;color:#1B2D6B;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #EEF1FB;display:flex;align-items:center;gap:10px">
+        <span style="background:#1B2D6B;border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#D4AF37;flex-shrink:0">{{ num }}</span>
+        {{ title }}
+      </h2>
+      <div style="font-size:13px;color:#4B5563;line-height:1.85">{{ content|safe }}</div>
+    </div>
+    {% endfor %}
+
+    <div style="background:#EEF1FB;border-radius:8px;padding:20px;margin-top:32px">
+      <h3 style="font-size:15px;font-weight:700;color:#1B2D6B;margin-bottom:10px">📬 Legal Inquiries</h3>
+      <p style="font-size:13px;color:#4B5563;line-height:1.8;margin:0">
+        For legal inquiries or disputes, contact our legal team:<br>
+        📧 <strong>legal@avefontrade.com</strong><br>
+        📞 <strong>+233 XX XXX XXXX</strong><br>
+        📍 <strong>Accra, Greater Accra Region, Ghana</strong><br>
+        These Terms are governed by the laws of the <strong>Republic of Ghana</strong>.
+      </p>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+    <a href="{% url 'frontend:privacy-policy' %}" style="background:#fff;border:1px solid #E0E4EF;color:#1B2D6B;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none">Privacy Policy →</a>
+    <a href="{% url 'frontend:seller-agreement' %}" style="background:#fff;border:1px solid #E0E4EF;color:#1B2D6B;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none">Seller Agreement →</a>
+    <a href="{% url 'frontend:index' %}" style="background:#1B2D6B;color:#fff;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none">← Back to Home</a>
+  </div>
+</div>
+</main>
+{% endblock %}

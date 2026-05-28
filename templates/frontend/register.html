@@ -1,0 +1,42 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}Register — Avefon Trade Ltd{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;min-height:80vh;padding:48px 0">
+  <div class="container" style="max-width:540px;margin:0 auto">
+    {% if messages %}{% for msg in messages %}
+    <div style="padding:12px 16px;border-radius:8px;margin-bottom:16px;background:#FFEBEE;color:#B71C1C">{{ msg }}</div>
+    {% endfor %}{% endif %}
+
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(27,45,107,0.12)">
+      <div style="background:#1B2D6B;padding:20px 24px">
+        <div style="color:#fff;font-size:18px;font-weight:700">Create Your Account</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:3px">Avefon Trade Ltd — Buyer/Seller Registration</div>
+      </div>
+      <div style="padding:24px">
+        <form method="POST">
+          {% csrf_token %}
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+            <div><label class="av-lbl">First Name *</label><input type="text" name="first_name" class="av-input" placeholder="Kwame" required></div>
+            <div><label class="av-lbl">Last Name *</label><input type="text" name="last_name" class="av-input" placeholder="Mensah" required></div>
+          </div>
+          <div style="margin-bottom:14px"><label class="av-lbl">Username *</label><input type="text" name="username" class="av-input" placeholder="kwame_mensah" required></div>
+          <div style="margin-bottom:14px"><label class="av-lbl">Email Address</label><input type="email" name="email" class="av-input" placeholder="your@email.com"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px">
+            <div><label class="av-lbl">Password *</label><input type="password" name="password1" class="av-input" placeholder="Min. 6 characters" required></div>
+            <div><label class="av-lbl">Confirm Password *</label><input type="password" name="password2" class="av-input" placeholder="Repeat password" required></div>
+          </div>
+          <button type="submit" class="av-submit">✅ Create Account</button>
+        </form>
+        <div style="text-align:center;margin-top:14px;font-size:13px;color:#6B7280">
+          Already have an account? <a href="{% url 'frontend:login' %}" style="color:#1B2D6B;font-weight:700">Sign In →</a>
+        </div>
+        <div style="text-align:center;margin-top:6px;font-size:13px;color:#6B7280">
+          Want to sell clothes? <a href="{% url 'frontend:vendor-register' %}" style="color:#D4AF37;font-weight:700">Register as Seller →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}

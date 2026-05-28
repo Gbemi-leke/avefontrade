@@ -1,0 +1,47 @@
+{% extends 'backend/base-dashboard.html' %}
+{% block title %}Edit Profile — Avefon Trade Ltd{% endblock %}
+{% block sidebar_role %}👤 My Account{% endblock %}
+{% block user_role_label %}Member{% endblock %}
+{% block page_title %}Edit Profile{% endblock %}
+{% block sidebar_nav %}
+<div class="dash-nav-section">My Account</div>
+<a href="{% url 'backend:user-dashboard' %}" class="dash-nav-link"><i class="fas fa-th-large"></i> Dashboard</a>
+<a href="{% url 'frontend:sell-offer' %}" class="dash-nav-link"><i class="fas fa-tag"></i> Submit Offer</a>
+<div class="dash-nav-section">Settings</div>
+<a href="{% url 'backend:edit-profile' %}" class="dash-nav-link active"><i class="fas fa-user-edit"></i> Edit Profile</a>
+<a href="{% url 'backend:change-password' %}" class="dash-nav-link"><i class="fas fa-lock"></i> Change Password</a>
+<a href="{% url 'frontend:logout' %}" class="dash-nav-link" style="color:#F87171"><i class="fas fa-sign-out-alt"></i> Logout</a>
+{% endblock %}
+{% block dashboard_content %}
+<div style="max-width:560px">
+  <div class="dash-card">
+    <div class="dash-card-head">
+      <div class="dash-card-title"><i class="fas fa-user-edit"></i> Edit Profile Details</div>
+    </div>
+    <div style="padding:24px">
+      <form method="POST">
+        {% csrf_token %}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+          <div class="dash-form-group" style="margin-bottom:0">
+            <label>First Name</label>
+            <input type="text" name="first_name" value="{{ request.user.first_name }}" class="dash-input" required>
+          </div>
+          <div class="dash-form-group" style="margin-bottom:0">
+            <label>Last Name</label>
+            <input type="text" name="last_name" value="{{ request.user.last_name }}" class="dash-input" required>
+          </div>
+        </div>
+        <div class="dash-form-group">
+          <label>Username</label>
+          <input type="text" name="username" value="{{ request.user.username }}" class="dash-input" required>
+        </div>
+        <div class="dash-form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" value="{{ request.user.email }}" class="dash-input">
+        </div>
+        <button type="submit" class="dash-btn dash-btn-primary" style="width:100%;padding:12px">💾 Save Changes</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'frontend/base.html' %}
+{% block title %}Help Center — Avefon Trade Ltd{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;min-height:80vh;padding:48px 0">
+  <div class="container" style="max-width:860px;margin:0 auto">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#1B2D6B,#253D8A);border-radius:12px;padding:32px;text-align:center;margin-bottom:24px">
+      <div style="font-size:48px;margin-bottom:12px">🤝</div>
+      <h1 style="color:#fff;font-size:26px;font-weight:700;margin-bottom:8px">How Can We Help You?</h1>
+      <p style="color:rgba(255,255,255,.65);font-size:14px;margin-bottom:20px">Find answers or reach our team directly on WhatsApp</p>
+      <a href="https://wa.me/85254701264?text=Hello%20Avefon%20Trade%20Ltd!%20I%20need%20help."
+         target="_blank"
+         style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:12px 28px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Chat Us on WhatsApp
+      </a>
+    </div>
+
+    <!-- Quick Contact Cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px">
+      <a href="https://wa.me/85254701264?text=Hello!%20I%20need%20help%20with%20my%20offer." target="_blank"
+         style="background:#fff;border:1px solid #E0E4EF;border-radius:10px;padding:20px;text-align:center;text-decoration:none;transition:all .2s" class="product-card">
+        <div style="font-size:32px;margin-bottom:8px">📦</div>
+        <div style="font-size:14px;font-weight:700;color:#1B2D6B;margin-bottom:4px">My Offer</div>
+        <div style="font-size:12px;color:#6B7280">Questions about your submitted offer</div>
+      </a>
+      <a href="https://wa.me/85254701264?text=Hello!%20I%20need%20help%20with%20payment." target="_blank"
+         style="background:#fff;border:1px solid #E0E4EF;border-radius:10px;padding:20px;text-align:center;text-decoration:none;transition:all .2s" class="product-card">
+        <div style="font-size:32px;margin-bottom:8px">💰</div>
+        <div style="font-size:14px;font-weight:700;color:#1B2D6B;margin-bottom:4px">Payment Issue</div>
+        <div style="font-size:12px;color:#6B7280">Payment delays or wrong amount</div>
+      </a>
+      <a href="https://wa.me/85254701264?text=Hello!%20I%20need%20help%20with%20my%20account." target="_blank"
+         style="background:#fff;border:1px solid #E0E4EF;border-radius:10px;padding:20px;text-align:center;text-decoration:none;transition:all .2s" class="product-card">
+        <div style="font-size:32px;margin-bottom:8px">👤</div>
+        <div style="font-size:14px;font-weight:700;color:#1B2D6B;margin-bottom:4px">My Account</div>
+        <div style="font-size:12px;color:#6B7280">Login, registration or profile issues</div>
+      </a>
+    </div>
+
+    <!-- FAQs -->
+    <div style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(27,45,107,.08)">
+      <div style="background:#1B2D6B;padding:16px 24px">
+        <h2 style="color:#fff;font-size:16px;font-weight:700;margin:0">❓ Frequently Asked Questions</h2>
+      </div>
+
+      {% for faq in faqs %}
+      <div style="border-bottom:1px solid #F3F4F6">
+        <button onclick="toggleFaq({{ forloop.counter }})"
+          style="width:100%;text-align:left;padding:16px 24px;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit">
+          <span style="font-size:14px;font-weight:600;color:#1B2D6B">{{ faq.q }}</span>
+          <span id="faqArrow{{ forloop.counter }}" style="color:#1B2D6B;font-size:18px;transition:transform .2s">+</span>
+        </button>
+        <div id="faqBody{{ forloop.counter }}" style="display:none;padding:0 24px 16px;font-size:13px;color:#4B5563;line-height:1.8">
+          {{ faq.a }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Still need help -->
+    <div style="background:#FDF6DC;border:1px solid rgba(212,175,55,.3);border-radius:10px;padding:20px;margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div style="font-size:15px;font-weight:700;color:#8A7010;margin-bottom:4px">Still need help?</div>
+        <div style="font-size:13px;color:#8A7010">Our team is available Mon–Sat, 8am–6pm (Ghana time)</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="https://wa.me/85254701264" target="_blank"
+           style="background:#25D366;color:#fff;padding:10px 18px;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none">💬 WhatsApp</a>
+        <a href="tel:+85254701264"
+           style="background:#1B2D6B;color:#fff;padding:10px 18px;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none">📞 Call Us</a>
+        <a href="mailto:lixuwu61@gmail.com"
+           style="background:#fff;color:#1B2D6B;border:1px solid #1B2D6B;padding:10px 18px;border-radius:7px;font-weight:700;font-size:13px;text-decoration:none">✉ Email</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}
+{% block extra_js %}
+<script>
+function toggleFaq(n) {
+  var body  = document.getElementById('faqBody' + n);
+  var arrow = document.getElementById('faqArrow' + n);
+  var open  = body.style.display === 'block';
+  body.style.display  = open ? 'none'  : 'block';
+  arrow.textContent   = open ? '+'     : '−';
+  arrow.style.transform = open ? '' : 'rotate(45deg)';
+}
+</script>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}Privacy Policy — Avefon Trade Ltd{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;padding:48px 0 80px">
+<div class="container" style="max-width:820px;margin:0 auto">
+
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#1B2D6B,#253D8A);border-radius:12px;padding:36px 40px;margin-bottom:32px;text-align:center">
+    <div style="font-size:40px;margin-bottom:12px">🔒</div>
+    <h1 style="color:#fff;font-size:28px;font-weight:700;font-family:'Playfair Display',serif;margin-bottom:8px">Privacy Policy</h1>
+    <p style="color:rgba(255,255,255,0.7);font-size:13px">Avefon Trade Ltd · Last updated: May 2025 · avefontrade.com</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:40px;box-shadow:0 2px 16px rgba(27,45,107,0.08)">
+
+    <p style="font-size:14px;color:#4B5563;line-height:1.8;margin-bottom:24px">
+      Welcome to Avefon Trade Ltd ("Avefon", "we", "us", or "our"). We are a clothing procurement platform based in Accra, Ghana. This Privacy Policy explains how we collect, use, protect, and share your personal information when you use our website at <strong>avefontrade.com</strong> and our related services.
+    </p>
+    <p style="font-size:14px;color:#4B5563;line-height:1.8;margin-bottom:32px">
+      By using our platform, you agree to the collection and use of information in accordance with this policy. If you do not agree, please do not use our services.
+    </p>
+
+    {% for section in sections %}
+    <div style="margin-bottom:32px">
+      <h2 style="font-size:17px;font-weight:700;color:#1B2D6B;margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid #EEF1FB;display:flex;align-items:center;gap:10px">
+        <span style="background:#EEF1FB;border-radius:50%;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#1B2D6B;flex-shrink:0">{{ forloop.counter }}</span>
+        {{ section.title }}
+      </h2>
+      <div style="font-size:13px;color:#4B5563;line-height:1.85">{{ section.content|safe }}</div>
+    </div>
+    {% endfor %}
+
+    <!-- Contact -->
+    <div style="background:#EEF1FB;border-radius:8px;padding:20px;margin-top:32px">
+      <h3 style="font-size:15px;font-weight:700;color:#1B2D6B;margin-bottom:10px">📬 Contact Us About Privacy</h3>
+      <p style="font-size:13px;color:#4B5563;line-height:1.8;margin:0">
+        If you have questions about this Privacy Policy or how we handle your data, please contact us:<br>
+        📧 <strong>lixuwu61@Gmail.com</strong><br>
+        📞 <strong>+85254701264</strong><br>
+        📍 <strong>Accra, Greater Accra Region, Ghana</strong>
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Bottom nav -->
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+    <a href="{% url 'frontend:terms-conditions' %}" style="background:#fff;border:1px solid #E0E4EF;color:#1B2D6B;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none">Terms & Conditions →</a>
+    <a href="{% url 'frontend:seller-agreement' %}" style="background:#fff;border:1px solid #E0E4EF;color:#1B2D6B;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none">Seller Agreement →</a>
+    <a href="{% url 'frontend:index' %}" style="background:#1B2D6B;color:#fff;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none">← Back to Home</a>
+  </div>
+</div>
+</main>
+{% endblock %}

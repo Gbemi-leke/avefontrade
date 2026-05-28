@@ -1,0 +1,66 @@
+{% extends 'backend/base-dashboard.html' %}
+{% block title %}Seller Dashboard — Avefon Trade Ltd{% endblock %}
+{% block sidebar_role %}🏪 Seller Account{% endblock %}
+{% block user_role_label %}Verified Seller{% endblock %}
+{% block page_title %}Seller Dashboard{% endblock %}
+{% block sidebar_nav %}
+<div class="dash-nav-section">Seller Panel</div>
+<a href="{% url 'backend:seller-dashboard' %}" class="dash-nav-link active"><i class="fas fa-th-large"></i> Dashboard</a>
+<a href="{% url 'frontend:product-listing' %}" class="dash-nav-link"><i class="fas fa-shopping-bag"></i> Browse Buying List</a>
+<a href="{% url 'frontend:sell-offer' %}" class="dash-nav-link"><i class="fas fa-tag"></i> Submit New Offer</a>
+<div class="dash-nav-section">Settings</div>
+<a href="{% url 'backend:edit-profile' %}" class="dash-nav-link"><i class="fas fa-user-edit"></i> Edit Profile</a>
+<a href="{% url 'backend:change-password' %}" class="dash-nav-link"><i class="fas fa-lock"></i> Change Password</a>
+<a href="{% url 'frontend:logout' %}" class="dash-nav-link" style="color:#F87171"><i class="fas fa-sign-out-alt"></i> Logout</a>
+{% endblock %}
+{% block dashboard_content %}
+<div style="background:linear-gradient(135deg,#1B2D6B,#253D8A);border-radius:10px;padding:22px 24px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+  <div>
+    <div style="color:#D4AF37;font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">🏪 Seller Dashboard</div>
+    <div style="color:#fff;font-size:20px;font-weight:700">{{ request.user.get_full_name|default:request.user.username }}</div>
+    <div style="color:rgba(255,255,255,.5);font-size:12px;margin-top:4px">{{ request.user.email|default:'No email set' }}</div>
+  </div>
+  <a href="{% url 'frontend:sell-offer' %}" style="background:#D4AF37;color:#111E4A;padding:11px 22px;border-radius:7px;font-weight:700;font-size:13px">+ New Offer</a>
+</div>
+<div class="stat-grid">
+  <div class="stat-card"><div class="stat-card-icon" style="background:#EEF1FB">📋</div><div><div class="stat-val">{{ total }}</div><div class="stat-label">Total Offers</div></div></div>
+  <div class="stat-card"><div class="stat-card-icon" style="background:#FEF3C7">⏳</div><div><div class="stat-val" style="color:#D97706">{{ pending }}</div><div class="stat-label">Pending</div></div></div>
+  <div class="stat-card"><div class="stat-card-icon" style="background:#DBEAFE">✅</div><div><div class="stat-val" style="color:#1E40AF">{{ approved }}</div><div class="stat-label">Approved</div></div></div>
+  <div class="stat-card"><div class="stat-card-icon" style="background:#D1FAE5">💰</div><div><div class="stat-val" style="color:#065F46">{{ paid }}</div><div class="stat-label">Paid</div></div></div>
+</div>
+<div class="dash-card">
+  <div class="dash-card-head">
+    <div class="dash-card-title"><i class="fas fa-tags"></i> My Offers</div>
+    <a href="{% url 'frontend:sell-offer' %}" class="dash-card-action">+ Submit Offer</a>
+  </div>
+  <div style="overflow-x:auto">
+    <table class="dash-table">
+      <thead><tr><th>Reference</th><th>Item</th><th>Qty</th><th>Total</th><th>Bank</th><th>Status</th><th>Date</th></tr></thead>
+      <tbody>
+        {% for offer in offers %}
+        <tr>
+          <td><strong style="color:#1B2D6B">{{ offer.ref }}</strong></td>
+          <td>{{ offer.item_name }}</td>
+          <td>{{ offer.qty }}</td>
+          <td><strong>GH₵ {{ offer.total }}</strong></td>
+          <td style="font-size:12px;color:#6B7280">{{ offer.bank }}</td>
+          <td>
+            {% if offer.status == 'paid' %}<span class="badge badge-success">💰 Paid</span>
+            {% elif offer.status == 'approved' %}<span class="badge badge-info">✅ Approved</span>
+            {% elif offer.status == 'rejected' %}<span class="badge badge-danger">❌ Rejected</span>
+            {% else %}<span class="badge badge-warning">⏳ Pending</span>{% endif %}
+          </td>
+          <td style="font-size:12px;color:#6B7280">{{ offer.date|default:'Just now' }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="7" style="text-align:center;padding:40px;color:#6B7280">
+          <div style="font-size:36px;margin-bottom:8px">📦</div>
+          <p style="margin-bottom:14px">No offers yet. Start by browsing the buying list!</p>
+          <a href="{% url 'frontend:product-listing' %}" style="background:#1B2D6B;color:#fff;padding:9px 20px;border-radius:6px;font-weight:700;font-size:13px">Browse Buying List →</a>
+        </td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

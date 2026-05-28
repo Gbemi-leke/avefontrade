@@ -1,0 +1,860 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Avefon Trade Ltd — Ghana's trusted clothing procurement platform. Post your clothes, get paid within 24 hours."
+    />
+    <title>Avefon Trade Ltd | Ghana's Trusted Clothing Buyer</title>
+    <link rel="icon" href="{% static 'frontend/images/avefon.png' %}" type="image/png"/>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'frontend/css/avefon.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="page-wrapper">
+    <!-- ===================== MOBILE OVERLAY ===================== -->
+    <div class="mob-overlay" id="mobOverlay" aria-hidden="true"></div>
+
+    <!-- ===================== MOBILE DRAWER ===================== -->
+    <nav class="mob-drawer" id="mobDrawer" aria-label="Mobile navigation">
+      <div class="mob-drawer-head">
+        <img src="{% static 'frontend/images/avefon.png' %}" alt="" style="width: auto; height: 60px;">
+        <button class="mob-close" id="mobClose" aria-label="Close menu">
+          ✕
+        </button>
+      </div>
+      <div class="mob-search">
+        <input
+          type="search"
+          placeholder="Search products, brands…"
+          aria-label="Search"
+        />
+      </div>
+      <p class="mob-section-label">Categories</p>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-smartphones-accessories.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Kente &amp; Traditional</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-laptops-tablets.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Women's Clothing</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-gaming.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Kente Cloth</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-appliances.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Women's Wear</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-tv-audio.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Accessories</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-cameras.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Wholesale Lots</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-home-outdoor.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Traditional Wear</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:product-listing' %}">
+        <img
+          src="images/ed-header-category-pc-components.png.webp"
+          alt=""
+          width="28"
+          height="28"
+          loading="lazy"
+        />
+        <span>Smock &amp; Fugu</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <p class="mob-section-label">Quick Links</p>
+      <a class="mob-nav-link" href="{% url 'frontend:order-tracking' %}">
+        <span style="font-size: 22px">🚚</span>
+        <span>How It Works</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'backend:seller-dashboard' %}">
+        <span style="font-size: 22px">🏪</span>
+        <span>Sell to Avefon</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <a class="mob-nav-link" href="{% url 'frontend:login' %}">
+        <span style="font-size: 22px">👤</span>
+        <span>My Account</span>
+        <span class="mob-nav-arrow">›</span>
+      </a>
+      <div class="mob-drawer-promo">
+        <p>🛒 Sell Your Clothes to Avefon!</p>
+        <small>Get paid in 24 hours. Verified sellers only.</small>
+        <a href="{% url 'frontend:product-listing' %}">Sell Now →</a>
+      </div>
+    </nav>
+
+    <!-- ===================== TOPBAR ===================== -->
+    <div class="topbar" role="banner">
+      <div class="container topbar-inner">
+        <div class="topbar-left">
+          <a href="{% url 'frontend:vendor-register' %}">🏪 Sell to Avefon</a>
+          <a href="{% url 'frontend:vendor-register' %}">Register as Seller</a>
+        </div>
+        <div class="topbar-marquee" aria-hidden="true">
+          <div class="topbar-marquee-track"><span>🇬🇭 Avefon Trade Ltd — Ghana's Trusted Clothing Buyer</span>
+            <span>💰 Sell your clothes &amp; get paid within 24 hours!</span>
+            <span>✅ Verified sellers only — register &amp; submit offers</span>
+            <span>🔒 100% secure bank transfer — GH₵ Cedi payments</span>
+            <span>⚡ We buy Ankara, Kente, Dashiki, fabrics &amp; more!</span>
+            <span>🎁 Join 600+ verified sellers on Avefon Trade Ltd</span>
+            <span>🇬🇭 Avefon Trade Ltd — Ghana's Trusted Clothing Buyer</span>
+            <span>💰 Sell your clothes &amp; get paid within 24 hours!</span>
+            <span>✅ Verified sellers only — register &amp; submit offers</span>
+            <span>🔒 100% secure bank transfer — GH₵ Cedi payments</span>
+            <span>⚡ We buy Ankara, Kente, Dashiki, fabrics &amp; more!</span>
+            <span>🎁 Join 600+ verified sellers on Avefon Trade Ltd</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <a href="tel:+85254701264">📞 +85254701264</a>
+          <a href="#">FAQs</a>
+          <a href="mailto:lixuwu61@gmail.com">✉ Email Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="site-header" id="siteHeader" role="banner">
+      <div class="container header-inner">
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <a href="{% url 'frontend:index' %}" class="site-logo" aria-label="Avefon Trade Ltd">
+          
+          <div class="logo-wordmark">
+            <img src="{% static 'frontend/images/avefon.png' %}" alt="" style="width: auto; height: 40px;">
+          </div>
+        </a>
+
+        <div class="header-search">
+          <form class="search-form" id="avSearchForm" role="search" action="product-listing.html"
+            method="get"
+          >
+            <select
+              class="search-category"
+              name="category"
+              aria-label="Category"
+            >
+              <option value="">What We Buy</option>
+              <option value="phones">Men's Wear</option>
+              <option value="laptops">Women's Clothing</option>
+              <option value="electronics">Wholesale Lots</option>
+              <option value="gaming">Kente &amp; Traditional</option>
+              <option value="appliances">Fabrics &amp; Textiles</option>
+           
+              <option value="cameras">Wholesale Lots</option>
+            </select>
+            <input
+              type="search"
+              name="q"
+              class="search-input"
+              placeholder="Search products, brands and categories…"
+              aria-label="Search products"
+            />
+            <button
+              type="submit"
+              class="search-submit"
+              id="searchSubmit"
+              aria-label="Search"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <div class="header-icons">
+          {% if user.is_authenticated %}
+          {% if user.is_staff %}
+          <a href="{% url 'backend:admin-dashboard' %}" class="hdr-btn" style="position:relative">
+            <svg class="hdr-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="hdr-btn-label">{{ user.first_name|default:user.username }}</span>
+            <span style="position:absolute;top:-4px;right:-4px;background:#D4AF37;color:#111E4A;font-size:8px;font-weight:800;padding:1px 5px;border-radius:8px;line-height:14px">ADMIN</span>
+          </a>
+          {% else %}
+          <a href="{% url 'backend:user-dashboard' %}" class="hdr-btn">
+            <svg class="hdr-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="hdr-btn-label">{{ user.first_name|default:user.username }}</span>
+          </a>
+          {% endif %}
+          <a href="#" onclick="showLogoutModal();return false" class="hdr-btn">
+            <svg class="hdr-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span class="hdr-btn-label">Logout</span>
+          </a>
+          {% else %}
+          <a href="{% url 'frontend:login' %}" class="hdr-btn" id="avHeaderSignIn">
+            <svg
+              class="hdr-btn-icon"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span class="hdr-btn-label">Account</span>
+          </a>
+          <a href="#" class="hdr-btn">
+            <svg
+              class="hdr-btn-icon"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              />
+            </svg>
+            <span class="hdr-btn-label">Wishlist</span>
+            <span class="hdr-badge" aria-label="3 items">3</span>
+          </a>
+          {% endif %}
+          <a href="{% url 'frontend:vendor-register' %}" class="hdr-btn" id="avHeaderSell" style="background:#D4AF37;border-radius:6px;padding:8px 14px">
+            <svg
+              class="hdr-btn-icon"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path
+                d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+              />
+            </svg>
+            <span class="hdr-btn-label" style="color:#111E4A;font-weight:700">Sell to Us</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="site-navbar" aria-label="Main navigation">
+      <div class="container navbar-inner">
+        <div class="nav-cat-wrap" id="navCatWrap">
+          <a
+            href="#"
+            class="nav-link nav-all"
+            id="navAllBtn"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            >
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+            All Categories
+          </a>
+          <div class="nav-cat-dropdown" id="navAllDrop" role="menu">
+            <a href="{% url 'frontend:product-listing' %}" role="menuitem"
+              ><img
+                src="images/ed-header-category-smartphones-accessories.png.webp"
+                alt=""
+                loading="lazy"
+                width="26"
+                height="26"
+              />Men's Wear</a
+            >
+            <a href="{% url 'frontend:product-listing' %}" role="menuitem"
+              ><img
+                src="images/ed-header-category-laptops-tablets.png.webp"
+                alt=""
+                loading="lazy"
+                width="26"
+                height="26"
+              />Women's Clothing</a
+            >
+            <a href="{% url 'frontend:product-listing' %}" role="menuitem"
+              ><img
+                src="images/ed-header-category-gaming.png.webp"
+                alt=""
+                loading="lazy"
+                width="26"
+                height="26"
+              />Kente &amp; Traditional</a
+            >
+            <a href="{% url 'frontend:product-listing' %}" role="menuitem"
+              ><img
+                src="images/ed-header-category-appliances.png.webp"
+                alt=""
+                loading="lazy"
+                width="26"
+                height="26"
+              />Fabrics &amp; Textiles</a
+            >
+           
+            <a href="{% url 'frontend:product-listing' %}" role="menuitem"
+              ><img
+                src="images/ed-header-category-cameras.png.webp"
+                alt=""
+                loading="lazy"
+                width="26"
+                height="26"
+              />Wholesale Lots</a
+            >
+            <a href="{% url 'frontend:product-listing' %}" role="menuitem"
+              ><img
+                src="images/ed-header-category-home-outdoor.png.webp"
+                alt=""
+                loading="lazy"
+                width="26"
+                height="26"
+              />Traditional Wear</a
+            >
+            <a href="{% url 'frontend:product-listing' %}" role="menuitem"
+              ><img
+                src="images/ed-header-category-pc-components.png.webp"
+                alt=""
+                loading="lazy"
+                width="26"
+                height="26"
+              />Smock &amp; Fugu</a
+            >
+          </div>
+        </div>
+
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link nav-fire"
+          >🔥 Urgent Buys</a
+        >
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Men's Wear</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Fabrics &amp; Textiles</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link nav-active"
+          >Men's Wear</a
+        >
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Fabrics &amp; Textiles</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Ankara Prints</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Dashiki Wear</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Smock &amp; Fugu</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Traditional Wear</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link">Kente &amp; Traditional</a>
+        <a href="{% url 'frontend:product-listing' %}" class="nav-link nav-deal"
+          >Other categories ›</a
+        >
+      </div>
+    </nav>
+
+{% block content %}
+
+{% endblock %}
+
+<!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer" role="contentinfo" style="padding: 20px;">
+      <div class="footer-top">
+        <div class="container footer-grid">
+          <div>
+            <div class="footer-logo-wrap">
+              <div class="footer-logo">
+                <img src="{% static 'frontend/images/avefon.png' %}" alt="" style="width: auto; height: 40px;">
+              </div>
+            </div>
+            <p class="footer-about">
+              Ghana's smartest online shopping destination. Quality products,
+              great prices, and fast delivery to your doorstep across Ghana.
+            </p>
+            <div class="footer-socials">
+              <a class="footer-social-btn" href="#" aria-label="Facebook">f</a>
+              <a class="footer-social-btn" href="#" aria-label="Twitter / X"
+                >𝕏</a
+              >
+              <a class="footer-social-btn" href="#" aria-label="Instagram"
+                >📷</a
+              >
+              <a class="footer-social-btn" href="#" aria-label="LinkedIn">in</a>
+            </div>
+            <div class="payment-icons">
+              <span class="payment-badge">💳 Visa</span>
+              <span class="payment-badge">Mastercard</span>
+              <span class="payment-badge">🏦 Transfer</span>
+              <span class="payment-badge">🚚 POD</span>
+            </div>
+          </div>
+          <div>
+            <h3 class="footer-col-title">Let Us Help You</h3>
+            <ul class="footer-links">
+              <li><a href="{% url 'frontend:login' %}">Your Account</a></li>
+              <li><a href="{% url 'frontend:order-tracking' %}">Track Your Order</a></li>
+              <li><a href="#">Returns &amp; Refunds</a></li>
+              <li><a href="{% url 'frontend:help-center' %}">Help Center</a></li>
+              <li><a href="https://wa.me/85254701264?text=Hello%20Avefon%20Trade%20Ltd!%20I%20need%20help." target="_blank">Contact Us 💬</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="footer-col-title">Make Money With Us</h3>
+            <ul class="footer-links">
+              <li><a href="{% url 'backend:seller-dashboard' %}">Sell to Avefon</a></li>
+              <li><a href="#">Affiliate Program</a></li>
+              <li><a href="https://wa.me/85254701264?text=Hello%20Avefon%20Trade%20Ltd!%20I%27m%20interested%20in%20advertising%20with%20you." target="_blank">Advertise with Us 📣</a></li>
+             
+            </ul>
+          </div>
+          <div>
+            <h3 class="footer-col-title">About Avefon</h3>
+            <ul class="footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press &amp; Media</a></li>
+              <li><a href="#">Investor Relations</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p class="footer-copy">
+          © 2025 Avefon Trade Ltd Limited. All Rights Reserved.
+        </p>
+        <nav class="footer-legal" aria-label="Legal links">
+          <a href="{% url 'frontend:privacy-policy' %}">Privacy Policy</a>
+          <a href="{% url 'frontend:terms-conditions' %}">Terms of Use</a>
+          <a href="{% url 'frontend:privacy-policy' %}">Cookie Policy</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- ===================== SCRIPTS ===================== -->
+    <script src="js/main.js" defer></script>
+  
+    <!-- ======================================================
+         AUTH MODAL — Sign In / Register
+         ====================================================== -->
+    <div class="av-overlay" id="avAuthModal">
+      <div class="av-modal">
+        <div class="av-modal-hdr">
+          <div>
+            <div class="av-modal-title"><span>Avefon</span> — Seller Portal</div>
+            <div class="av-modal-subtitle">Register or sign in to submit offers</div>
+          </div>
+          <button class="av-modal-close">×</button>
+        </div>
+        <div class="av-modal-body">
+          <div class="av-tabs">
+            <button class="av-tab active" data-tab="login">🔐 Sign In</button>
+            <button class="av-tab" data-tab="register">📝 Create Account</button>
+          </div>
+
+          <!-- LOGIN -->
+          <div id="avLoginForm">
+            <div class="av-mb">
+              <label class="av-lbl">Phone Number or Email</label>
+              <input id="avLoginUser" class="av-input" placeholder="+85254701264 or email@example.com">
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Password</label>
+              <input type="password" id="avLoginPass" class="av-input" placeholder="Enter your password">
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#6B7280;cursor:pointer">
+                <input type="checkbox" style="accent-color:#1B2D6B"> Remember me
+              </label>
+              <a href="#" style="font-size:12px;color:#1B2D6B">Forgot password?</a>
+            </div>
+            <button class="av-submit" id="avLoginBtn">🔐 Sign In</button>
+            <p style="text-align:center;margin-top:12px;font-size:12px;color:#6B7280">
+              No account? <a href="#" style="color:#1B2D6B;font-weight:700" onclick="$('.av-tab[data-tab=register]').click();return false">Register here →</a>
+            </p>
+          </div>
+
+          <!-- REGISTER -->
+          <div id="avRegForm" style="display:none">
+            <div class="av-row2 av-mb">
+              <div><label class="av-lbl">First Name <span class="req">*</span></label><input id="avRegName" class="av-input" placeholder="Kwame"></div>
+              <div><label class="av-lbl">Last Name <span class="req">*</span></label><input class="av-input" placeholder="Mensah"></div>
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Phone Number <span class="req">*</span></label>
+              <div style="display:flex;gap:8px">
+                <input type="tel" id="avRegPhone" class="av-input" placeholder="+85254701264" style="flex:1">
+                <button class="av-vc-btn">Send Code</button>
+              </div>
+              <div class="av-hint">A 6-digit verification code will be sent to this number</div>
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Verification Code <span class="req">*</span></label>
+              <input id="avRegCode" class="av-input" placeholder="Enter 6-digit code">
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Email Address <span class="req">*</span></label>
+              <input type="email" id="avRegEmail" class="av-input" placeholder="your@email.com">
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Seller Type</label>
+              <select class="av-select">
+                <option>Individual Seller</option>
+                <option>Clothing Manufacturer</option>
+                <option>Wholesale Distributor</option>
+                <option>Market Trader</option>
+                <option>Factory / Mill</option>
+              </select>
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Password <span class="req">*</span></label>
+              <input type="password" id="avRegPass" class="av-input" placeholder="Create a strong password (min. 8 characters)">
+            </div>
+            <div style="margin-bottom:16px">
+              <label style="display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#6B7280;cursor:pointer">
+                <input type="checkbox" id="avRegTerms" style="accent-color:#1B2D6B;margin-top:2px">
+                I agree to Avefon's <a href="#" style="color:#1B2D6B">Seller Agreement</a> and <a href="#" style="color:#1B2D6B">Terms of Service</a>
+              </label>
+            </div>
+            <button class="av-submit" id="avRegBtn">✅ Create Seller Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         ITEM DETAIL MODAL
+         ====================================================== -->
+    <div class="av-overlay" id="avDetailModal">
+      <div class="av-modal">
+        <div class="av-modal-hdr">
+          <div>
+            <div class="av-modal-title">Item <span>Details</span></div>
+            <div class="av-modal-subtitle">What Avefon Trade Ltd is buying</div>
+          </div>
+          <button class="av-modal-close">×</button>
+        </div>
+        <div class="av-modal-body">
+          <div id="avDetailBg" style="height:160px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:72px;margin-bottom:16px">
+            <span id="avDetailEmoji"></span>
+          </div>
+          <h3 id="avDetailName" style="font-size:18px;color:#1B2D6B;margin-bottom:8px"></h3>
+          <div id="avDetailStars" style="color:#D4AF37;font-size:14px;margin-bottom:12px"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+            <div style="background:#EEF1FB;border-radius:8px;padding:12px;text-align:center">
+              <div style="font-size:11px;color:#6B7280;margin-bottom:4px">We Pay Up To</div>
+              <div id="avDetailPrice" style="font-size:20px;font-weight:700;color:#1B2D6B"></div>
+            </div>
+            <div style="background:#EEF1FB;border-radius:8px;padding:12px;text-align:center">
+              <div style="font-size:11px;color:#6B7280;margin-bottom:4px">Minimum Quantity</div>
+              <div id="avDetailQty" style="font-size:15px;font-weight:700;color:#1B2D6B"></div>
+            </div>
+          </div>
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;color:#6B7280;margin-bottom:6px" id="avDetailPct"></div>
+            <div class="av-progress-bar"><div class="av-progress-fill" id="avDetailBar" style="width:0%"></div></div>
+          </div>
+          <div style="background:#FDF6DC;border:1px solid rgba(212,175,55,0.3);border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:#8A7010">
+            <strong>💡 How it works:</strong> Register as a verified seller, click "Sell This to Avefon", fill in your offer and bank details, then deliver the goods to our warehouse. We pay you within 24 hours of inspection.
+          </div>
+          <button class="av-submit" id="avDetailSellBtn">🏷 Sell This to Avefon →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================
+         SELL MODAL — Submit Offer
+         ====================================================== -->
+    <div class="av-overlay" id="avSellModal">
+      <div class="av-modal av-wide">
+        <div class="av-modal-hdr">
+          <div>
+            <div class="av-modal-title">Sell to <span>Avefon Trade Ltd</span></div>
+            <div class="av-modal-subtitle">Fill carefully — we'll contact you within 24 hours</div>
+          </div>
+          <button class="av-modal-close">×</button>
+        </div>
+        <div class="av-modal-body">
+
+          <!-- SUCCESS STATE -->
+          <div id="avSellSuccess" style="display:none" class="av-success">
+            <div class="av-success-icon">✅</div>
+            <h3>Offer Submitted!</h3>
+            <p>Our team at Avefon Trade Ltd will review your offer and contact you within <strong>24 hours</strong>.<br>
+            Payment will be transferred directly to your bank account after goods are received and inspected.</p>
+            <div class="av-ref" id="avRefCode">AVF-000000</div>
+            <p style="font-size:12px;margin-top:4px">Save this reference number for tracking</p>
+            <button class="av-submit" style="width:auto;padding:10px 28px;margin-top:16px" onclick="closeModal('sell')">Close</button>
+          </div>
+
+          <!-- FORM STATE -->
+          <div id="avSellForm">
+            <!-- Item pill -->
+            <div class="av-item-pill">
+              <div class="av-item-pill-name" id="avSellItemName">Submit your offer</div>
+              <div class="av-item-pill-price" id="avSellItemPrice">Fill all fields carefully. Bank details must be 100% accurate.</div>
+            </div>
+
+            <!-- ITEM DETAILS -->
+            <div class="av-section-label">📦 Item Information</div>
+            <div class="av-mb">
+              <label class="av-lbl">Item / Product Name <span class="req">*</span></label>
+              <input id="avSellItemField" class="av-input" placeholder="e.g. Men's Ankara Long Sleeve Shirt">
+            </div>
+            <div class="av-row3 av-mb">
+              <div>
+                <label class="av-lbl">Quantity Available <span class="req">*</span></label>
+                <input type="number" id="avSellQty" class="av-input" placeholder="e.g. 50 pieces">
+              </div>
+              <div>
+                <label class="av-lbl">Your Price (GH₵) <span class="req">*</span></label>
+                <input type="number" id="avSellPrice" class="av-input" placeholder="Per unit / yard">
+              </div>
+              <div>
+                <label class="av-lbl">Condition</label>
+                <select class="av-select">
+                  <option>Brand New</option>
+                  <option>New with Tags</option>
+                  <option>Wholesale / Bulk</option>
+                  <option>Factory Direct</option>
+                  <option>Bale Goods</option>
+                </select>
+              </div>
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Description</label>
+              <textarea class="av-textarea" rows="2" placeholder="Fabric type, sizes, colors, designs, origin, any extra info…"></textarea>
+            </div>
+            <div class="av-mb">
+              <label class="av-lbl">Product Photos</label>
+              <input type="file" class="av-input" accept="image/*" multiple style="padding:8px">
+              <div class="av-hint">Upload clear photos of the items. JPG, PNG, WEBP accepted.</div>
+            </div>
+
+            <hr class="av-divider">
+
+            <!-- BANK DETAILS -->
+            <div class="av-section-label">💳 Payment Details</div>
+            <div class="av-bank-box">
+              <div class="av-bank-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Where Avefon Will Send Your Payment
+              </div>
+              <div class="av-mb">
+                <label class="av-lbl">Account Holder Full Name <span class="req">*</span></label>
+                <input id="avBankName" class="av-input" placeholder="Exact name as it appears on your bank account">
+              </div>
+              <div class="av-row2 av-mb">
+                <div>
+                  <label class="av-lbl">Bank / Mobile Money <span class="req">*</span></label>
+                  <select id="avBank" class="av-select">
+                    <option value="">— Select Bank or MoMo —</option>
+                    <optgroup label="🏦 Banks">
+                      <option>GCB Bank</option>
+                      <option>Ecobank Ghana</option>
+                      <option>Absa Bank Ghana</option>
+                      <option>Fidelity Bank Ghana</option>
+                      <option>Zenith Bank Ghana</option>
+                      <option>Standard Chartered Ghana</option>
+                      <option>Cal Bank</option>
+                      <option>Consolidated Bank Ghana</option>
+                      <option>Agricultural Development Bank</option>
+                    </optgroup>
+                    <optgroup label="📱 Mobile Money">
+                      <option>MTN Mobile Money (MoMo)</option>
+                      <option>Vodafone Cash</option>
+                      <option>AirtelTigo Money</option>
+                    </optgroup>
+                  </select>
+                </div>
+                <div>
+                  <label class="av-lbl">Account / MoMo Number <span class="req">*</span></label>
+                  <input id="avAccNum" class="av-input" placeholder="Your account or mobile money number">
+                </div>
+              </div>
+              <div class="av-row2 av-mb">
+                <div>
+                  <label class="av-lbl">Branch (if Bank)</label>
+                  <input class="av-input" placeholder="e.g. Accra Central Branch">
+                </div>
+                <div>
+                  <label class="av-lbl">Your Contact Phone</label>
+                  <input type="tel" class="av-input" placeholder="+85254701264">
+                </div>
+              </div>
+              <div class="av-bank-warn">
+                ⚠ Double-check all details above. Avefon Trade Ltd transfers your payment here after goods are received and inspected. We are not responsible for incorrect information.
+              </div>
+            </div>
+
+            <button class="av-submit" id="avSellSubmit" style="margin-top:18px">
+              📤 Submit Offer to Avefon Trade Ltd
+            </button>
+          </div><!-- end avSellForm -->
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="avTop" title="Back to top">↑</button>
+
+    <!-- Scripts -->
+    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontend/js/main.js' %}"></script>
+    <script src="{% static 'frontend/js/avefon.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+{% block extra_js %}{% endblock %}
+
+<!-- ===== LOGOUT MODAL ===== -->
+<div id="logoutModal" style="display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;background:rgba(17,30,74,0.7);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:14px;padding:32px 28px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:modalIn .2s ease">
+    <div style="font-size:48px;margin-bottom:12px">👋</div>
+    <h3 style="font-size:18px;font-weight:700;color:#111E4A;margin-bottom:8px">Logging Out?</h3>
+    <p style="font-size:13px;color:#6B7280;line-height:1.6;margin-bottom:24px">
+      Are you sure you want to log out of your Avefon account?
+    </p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideLogoutModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;color:#374151;cursor:pointer">
+        Cancel
+      </button>
+      <form method="POST" action="{% url 'frontend:logout' %}" style="flex:1">
+        {% csrf_token %}
+        <button type="submit" style="width:100%;padding:11px;border:none;background:#E53935;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">
+          Yes, Log Out
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes modalIn { from { opacity:0; transform:scale(.92) } to { opacity:1; transform:scale(1) } }
+#logoutModal.show { display:flex !important; }
+</style>
+
+<script>
+function showLogoutModal() {
+  document.getElementById('logoutModal').classList.add('show');
+  document.getElementById('logoutModal').style.display = 'flex';
+}
+function hideLogoutModal() {
+  document.getElementById('logoutModal').classList.remove('show');
+  document.getElementById('logoutModal').style.display = 'none';
+}
+document.getElementById('logoutModal').addEventListener('click', function(e) {
+  if (e.target === this) hideLogoutModal();
+});
+</script>
+
+
+<!-- ===== WHATSAPP LIVE CHAT FLOAT ===== -->
+<a id="waFloat"
+   href="https://wa.me/85254701264?text=Hello%20Avefon%20Trade%20Ltd!%20I%20need%20help%20with%20selling%20my%20clothing%20items."
+   target="_blank"
+   title="Chat with us on WhatsApp"
+   style="position:fixed;bottom:24px;right:24px;z-index:9000;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.5);transition:all 0.3s;text-decoration:none">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+  <span style="position:absolute;top:-4px;left:-4px;background:#E53935;color:#fff;font-size:9px;font-weight:700;padding:2px 5px;border-radius:8px;white-space:nowrap">Live Chat</span>
+</a>
+<style>
+#waFloat:hover { transform:scale(1.1); box-shadow:0 6px 28px rgba(37,211,102,0.7); }
+</style>
+
+</body>
+</html>

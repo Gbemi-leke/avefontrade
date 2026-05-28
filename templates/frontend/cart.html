@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cart — Izzymall.ng</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body class="page-wrapper">
+
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <nav class="mob-drawer" id="mobDrawer">
+    <div class="mob-drawer-head"><span class="mob-drawer-logo">izzy<span>mall</span><sup>.ng™</sup></span><button class="mob-close" id="mobClose">✕</button></div>
+    <div class="mob-search"><input type="search" placeholder="Search products…" /></div>
+    <p class="mob-section-label">Categories</p>
+    <a class="mob-nav-link" href="product-listing.html"><img src="images/ed-header-category-smartphones-accessories.png.webp" alt="" width="28" height="28" loading="lazy" /><span>Phones &amp; Tablets</span><span class="mob-nav-arrow">›</span></a>
+    <a class="mob-nav-link" href="product-listing.html"><img src="images/ed-header-category-gaming.png.webp" alt="" width="28" height="28" loading="lazy" /><span>Gaming</span><span class="mob-nav-arrow">›</span></a>
+    <a class="mob-nav-link" href="order-tracking.html"><span style="font-size:22px">🚚</span><span>Track My Order</span><span class="mob-nav-arrow">›</span></a>
+    <a class="mob-nav-link" href="login.html"><span style="font-size:22px">👤</span><span>My Account</span><span class="mob-nav-arrow">›</span></a>
+    <div class="mob-drawer-promo"><p>🔥 Flash Deals — Up to 70% Off!</p><small>Ends tonight.</small><a href="product-listing.html">Shop Now →</a></div>
+  </nav>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left"><a href="#">🏪 Sell on Izzymall</a></div>
+      <div class="topbar-marquee" aria-hidden="true"><div class="topbar-marquee-track"><span>🔥 Flash Deals up to 70% off today!</span><span>🚚 Free delivery on orders above ₦10,000</span><span>✅ 15-day hassle-free returns</span><span>🔥 Flash Deals up to 70% off today!</span><span>🚚 Free delivery on orders above ₦10,000</span><span>✅ 15-day hassle-free returns</span></div></div>
+      <div class="topbar-right"><a href="order-tracking.html">🚚 Track Order</a><a href="#">Help</a></div>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+      <a href="index.html" class="site-logo"><div class="logo-mark">a.</div><div class="logo-wordmark"><span class="logo-name">izzy<span>mall</span><sup>.ng™</sup></span><span class="logo-tagline">Nigeria's Smartest Shopping</span></div></a>
+      <div class="header-search">
+        <form class="search-form" action="product-listing.html" method="get">
+          <select class="search-category"><option>All Categories</option></select>
+          <input type="search" class="search-input" placeholder="Search products, brands…" />
+          <button type="submit" class="search-submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+        </form>
+      </div>
+      <div class="header-icons">
+        <a href="login.html" class="hdr-btn"><svg class="hdr-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="hdr-btn-label">Account</span></a>
+        <a href="wishlist.html" class="hdr-btn"><svg class="hdr-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="hdr-btn-label">Wishlist</span><span class="hdr-badge">3</span></a>
+        <a href="cart.html" class="hdr-btn"><svg class="hdr-btn-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span class="hdr-btn-label">Cart</span><span class="hdr-badge cart-badge">3</span></a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="site-navbar">
+    <div class="container navbar-inner">
+      <div class="nav-cat-wrap" id="navCatWrap"><a href="#" class="nav-link nav-all" id="navAllBtn">☰ All Categories</a><div class="nav-cat-dropdown" id="navAllDrop"><a href="product-listing.html"><img src="images/ed-header-category-smartphones-accessories.png.webp" alt="" loading="lazy" width="26" height="26" />Phones &amp; Tablets</a><a href="product-listing.html"><img src="images/ed-header-category-gaming.png.webp" alt="" loading="lazy" width="26" height="26" />Gaming</a></div></div>
+      <a href="product-listing.html" class="nav-link nav-fire">🔥 Flash Deals</a>
+      <a href="product-listing.html" class="nav-link">🏅 Official Store</a>
+      <a href="product-listing.html" class="nav-link">Appliances</a>
+      <a href="product-listing.html" class="nav-link">Phones &amp; Tablets</a>
+      <a href="product-listing.html" class="nav-link">Health &amp; Beauty</a>
+      <a href="product-listing.html" class="nav-link">Home &amp; Office</a>
+      <a href="product-listing.html" class="nav-link">Electronics</a>
+      <a href="product-listing.html" class="nav-link">Fashion</a>
+      <a href="product-listing.html" class="nav-link">Supermarket</a>
+      <a href="product-listing.html" class="nav-link">Computing</a>
+      <a href="product-listing.html" class="nav-link">Baby Products</a>
+      <a href="product-listing.html" class="nav-link">Gaming</a>
+      <a href="product-listing.html" class="nav-link nav-deal">Other categories ›</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      <nav class="breadcrumb"><a href="index.html">Home</a><span class="breadcrumb-sep">›</span><span>My Cart</span></nav>
+
+      <div class="page-hero" style="margin:14px 0">
+        <div class="container page-hero-inner">
+          <div>
+            <p class="page-hero-title">🛒 My Shopping Cart</p>
+            <p class="page-hero-sub">3 items in your cart</p>
+          </div>
+          <a href="product-listing.html" style="color:#c4b5fd;font-size:13px;font-weight:700">← Continue Shopping</a>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="checkout-steps" style="margin-bottom:20px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px 20px">
+        <div class="checkout-step active"><div class="step-num">1</div><span>Cart</span></div>
+        <div class="step-connector"></div>
+        <div class="checkout-step"><div class="step-num">2</div><span>Delivery</span></div>
+        <div class="step-connector"></div>
+        <div class="checkout-step"><div class="step-num">3</div><span>Payment</span></div>
+        <div class="step-connector"></div>
+        <div class="checkout-step"><div class="step-num">4</div><span>Confirmed</span></div>
+      </div>
+
+      <div class="cart-page-wrap">
+
+        <!-- ===== CART ITEMS ===== -->
+        <div class="cart-items-section">
+          <div class="cart-section-head">
+            <span class="cart-section-title">Cart Items (3)</span>
+            <label class="cart-select-all"><input type="checkbox" checked style="accent-color:var(--purple)" /> Select all items</label>
+          </div>
+
+          <div class="cart-item">
+            <input type="checkbox" checked style="accent-color:var(--purple)" aria-label="Select item" />
+            <img class="cart-item-img" src="images/apple-iphone-15-pro-1-270x309.jpg" alt="Apple iPhone 15 Pro"
+              srcset="images/apple-iphone-15-pro-1-88x100.jpg.webp 88w, images/apple-iphone-15-pro-1-270x309.jpg 270w"
+              sizes="90px" loading="lazy" decoding="async" />
+            <div class="cart-item-info">
+              <p class="cart-item-name"><a href="product-detail.html">Apple iPhone 15 Pro 256GB — Natural Titanium</a></p>
+              <p class="cart-item-meta">Color: Natural Titanium · Storage: 256 GB · Sold by: Izzymall Official</p>
+              <div class="cart-item-actions">
+                <div class="qty-control" style="border-radius:6px;border-color:var(--border)">
+                  <button class="qty-btn" style="width:30px;height:30px;font-size:15px">−</button>
+                  <input class="qty-val" type="number" value="1" min="1" style="width:36px;height:30px;font-size:13px" />
+                  <button class="qty-btn" style="width:30px;height:30px;font-size:15px">+</button>
+                </div>
+                <button class="cart-item-action-btn">💙 Save for Later</button>
+                <button class="cart-item-action-btn del">🗑️ Remove</button>
+              </div>
+            </div>
+            <div class="cart-item-price"><p class="price-current">₦1,480,000</p><p class="price-old">₦1,900,000</p><p style="font-size:11px;color:var(--green);font-weight:700;margin-top:2px">Save ₦420,000</p></div>
+          </div>
+
+          <div class="cart-item">
+            <input type="checkbox" checked style="accent-color:var(--purple)" aria-label="Select item" />
+            <img class="cart-item-img" src="images/dualsense-1-270x309.jpg" alt="DualSense Controller"
+              srcset="images/dualsense-1-88x100.jpg.webp 88w, images/dualsense-1-270x309.jpg 270w"
+              sizes="90px" loading="lazy" decoding="async" />
+            <div class="cart-item-info">
+              <p class="cart-item-name"><a href="product-detail.html">PlayStation DualSense Wireless Controller — White</a></p>
+              <p class="cart-item-meta">Color: White · Sold by: Izzymall Game Store</p>
+              <div class="cart-item-actions">
+                <div class="qty-control" style="border-radius:6px">
+                  <button class="qty-btn" style="width:30px;height:30px;font-size:15px">−</button>
+                  <input class="qty-val" type="number" value="2" min="1" style="width:36px;height:30px;font-size:13px" />
+                  <button class="qty-btn" style="width:30px;height:30px;font-size:15px">+</button>
+                </div>
+                <button class="cart-item-action-btn">💙 Save for Later</button>
+                <button class="cart-item-action-btn del">🗑️ Remove</button>
+              </div>
+            </div>
+            <div class="cart-item-price"><p class="price-current">₦116,000</p><p class="price-old">₦150,000</p><p style="font-size:11px;color:var(--gray-500);font-weight:600;margin-top:2px">Qty: 2</p></div>
+          </div>
+
+          <div class="cart-item">
+            <input type="checkbox" checked style="accent-color:var(--purple)" aria-label="Select item" />
+            <img class="cart-item-img" src="images/god-of-war-ragnarok-1-270x309.jpg" alt="God of War Ragnarok"
+              srcset="images/god-of-war-ragnarok-1-88x100.jpg.webp 88w, images/god-of-war-ragnarok-1-270x309.jpg 270w"
+              sizes="90px" loading="lazy" decoding="async" />
+            <div class="cart-item-info">
+              <p class="cart-item-name"><a href="product-detail.html">God of War: Ragnarök — PS5 Standard Edition</a></p>
+              <p class="cart-item-meta">Platform: PS5 · Sold by: Izzymall Game Store</p>
+              <div class="cart-item-actions">
+                <div class="qty-control" style="border-radius:6px">
+                  <button class="qty-btn" style="width:30px;height:30px;font-size:15px">−</button>
+                  <input class="qty-val" type="number" value="1" min="1" style="width:36px;height:30px;font-size:13px" />
+                  <button class="qty-btn" style="width:30px;height:30px;font-size:15px">+</button>
+                </div>
+                <button class="cart-item-action-btn">💙 Save for Later</button>
+                <button class="cart-item-action-btn del">🗑️ Remove</button>
+              </div>
+            </div>
+            <div class="cart-item-price"><p class="price-current">₦26,000</p><p class="price-old">₦32,000</p></div>
+          </div>
+        </div>
+
+        <!-- ===== ORDER SUMMARY ===== -->
+        <div class="order-summary-card">
+          <h2 class="summary-title">Order Summary</h2>
+
+          <div class="coupon-row">
+            <input type="text" class="coupon-input" placeholder="Coupon or promo code" />
+            <button class="coupon-btn">Apply</button>
+          </div>
+
+          <div class="summary-rows">
+            <div class="summary-row"><span class="label">Subtotal (3 items)</span><span class="value">₦1,622,000</span></div>
+            <div class="summary-row"><span class="label">Delivery fee</span><span class="value free">FREE</span></div>
+            <div class="summary-row"><span class="label">Discount</span><span class="value" style="color:var(--red)">−₦602,000</span></div>
+            <div class="summary-row"><span class="label">VAT (7.5%)</span><span class="value">₦121,650</span></div>
+          </div>
+
+          <div class="summary-total-row">
+            <span class="summary-total-label">Total</span>
+            <span class="summary-total-value">₦1,141,650</span>
+          </div>
+
+          <a href="checkout.html" class="btn-checkout">Proceed to Checkout →</a>
+          <p class="summary-secure">🔒 Secure Checkout — 256-bit SSL Encrypted</p>
+
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+            <p style="font-size:12px;color:var(--gray-500);font-weight:700;margin-bottom:8px">WE ACCEPT</p>
+            <div class="payment-icons" style="flex-wrap:wrap">
+              <span class="payment-badge">💳 Visa</span>
+              <span class="payment-badge">Mastercard</span>
+              <span class="payment-badge">🏦 Transfer</span>
+              <span class="payment-badge">🚚 Pay on Delivery</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Recommended -->
+      <section class="section" style="margin-bottom:30px">
+        <div class="section-inner">
+          <div class="section-head"><h2 class="section-title">You Might Also <span>Need</span></h2><a href="product-listing.html" class="see-all-link">See All ›</a></div>
+          <ul class="products-grid" role="list">
+            <li class="product-card"><button class="product-wishlist">🤍</button><a href="product-detail.html" class="product-img-wrap"><img src="images/google-pixel-8-1-270x309.jpg" alt="Pixel 8" srcset="images/google-pixel-8-1-270x309.jpg 270w" sizes="220px" width="270" height="309" loading="lazy" decoding="async" /></a><div class="product-info"><h3 class="product-name"><a href="product-detail.html">Google Pixel 8 128GB</a></h3><div class="product-rating"><div class="stars">★★★★★</div><span class="review-count">(456)</span></div><div class="product-price-row"><span class="price-current">₦480,000</span><span class="price-old">₦580,000</span></div></div><div class="product-actions"><button class="action-btn action-btn-cart" data-add-cart="px8c" data-name="Pixel 8" data-price="480000">🛒 Cart</button></div></li>
+            <li class="product-card"><button class="product-wishlist">🤍</button><a href="product-detail.html" class="product-img-wrap"><img src="images/nokia-g60-5g-1-270x309.jpg" alt="Nokia G60" srcset="images/nokia-g60-5g-1-270x309.jpg 270w" sizes="220px" width="270" height="309" loading="lazy" decoding="async" /></a><div class="product-info"><h3 class="product-name"><a href="product-detail.html">Nokia G60 5G 128GB</a></h3><div class="product-rating"><div class="stars">★★★★☆</div><span class="review-count">(213)</span></div><div class="product-price-row"><span class="price-current">₦185,000</span><span class="price-old">₦240,000</span></div></div><div class="product-actions"><button class="action-btn action-btn-cart" data-add-cart="nokg60c" data-name="Nokia G60" data-price="185000">🛒 Cart</button></div></li>
+            <li class="product-card"><button class="product-wishlist">🤍</button><a href="product-detail.html" class="product-img-wrap"><img src="images/forza-horizon-5-1-270x309.jpg" alt="Forza Horizon 5" srcset="images/forza-horizon-5-1-270x309.jpg 270w" sizes="220px" width="270" height="309" loading="lazy" decoding="async" /></a><div class="product-info"><h3 class="product-name"><a href="product-detail.html">Forza Horizon 5 Premium Edition</a></h3><div class="product-rating"><div class="stars">★★★★★</div><span class="review-count">(2,109)</span></div><div class="product-price-row"><span class="price-current">₦24,000</span><span class="price-old">₦30,000</span></div></div><div class="product-actions"><button class="action-btn action-btn-cart" data-add-cart="forzac" data-name="Forza Horizon 5" data-price="24000">🛒 Cart</button></div></li>
+            <li class="product-card"><button class="product-wishlist">🤍</button><a href="product-detail.html" class="product-img-wrap"><img src="images/cyberpunk-2077-1-270x309.jpg" alt="Cyberpunk 2077" srcset="images/cyberpunk-2077-1-270x309.jpg 270w" sizes="220px" width="270" height="309" loading="lazy" decoding="async" /></a><div class="product-info"><h3 class="product-name"><a href="product-detail.html">Cyberpunk 2077 Phantom Liberty</a></h3><div class="product-rating"><div class="stars">★★★★☆</div><span class="review-count">(1,087)</span></div><div class="product-price-row"><span class="price-current">₦22,500</span><span class="price-old">₦30,000</span></div></div><div class="product-actions"><button class="action-btn action-btn-cart" data-add-cart="cp2077c" data-name="Cyberpunk 2077" data-price="22500">🛒 Cart</button></div></li>
+            <li class="product-card"><span class="product-card-badge badge-sale">-22%</span><button class="product-wishlist">🤍</button><a href="product-detail.html" class="product-img-wrap"><img src="images/bamix-deluxe-m200-1-270x309.jpg" alt="Bamix M200" srcset="images/bamix-deluxe-m200-1-270x309.jpg 270w" sizes="220px" width="270" height="309" loading="lazy" decoding="async" /></a><div class="product-info"><h3 class="product-name"><a href="product-detail.html">Bamix Deluxe M200 Hand Blender</a></h3><div class="product-rating"><div class="stars">★★★★★</div><span class="review-count">(224)</span></div><div class="product-price-row"><span class="price-current">₦85,000</span><span class="price-old">₦110,000</span></div></div><div class="product-actions"><button class="action-btn action-btn-cart" data-add-cart="bamixc" data-name="Bamix M200" data-price="85000">🛒 Cart</button></div></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <a href="index.html" class="bnav-item"><span class="bnav-icon">🏠</span><span>Home</span></a>
+      <a href="product-listing.html" class="bnav-item"><span class="bnav-icon">🔍</span><span>Browse</span></a>
+      <button class="bnav-item" id="bnavMenu"><span class="bnav-icon">☰</span><span>Menu</span></button>
+      <a href="cart.html" class="bnav-item active"><span class="bnav-icon">🛒</span><span class="bnav-badge">3</span><span>Cart</span></a>
+      <a href="login.html" class="bnav-item"><span class="bnav-icon">👤</span><span>Account</span></a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="footer-top"><div class="container footer-grid">
+      <div><div class="footer-logo-wrap"><div class="footer-logo">izzy<span>mall</span><sup>.ng™</sup></div></div><p class="footer-about">Nigeria's smartest online shopping destination.</p><div class="footer-socials"><a class="footer-social-btn" href="#">f</a><a class="footer-social-btn" href="#">𝕏</a><a class="footer-social-btn" href="#">📷</a></div></div>
+      <div><h3 class="footer-col-title">Let Us Help You</h3><ul class="footer-links"><li><a href="login.html">Your Account</a></li><li><a href="order-tracking.html">Track Your Order</a></li><li><a href="#">Returns &amp; Refunds</a></li></ul></div>
+      <div><h3 class="footer-col-title">Make Money With Us</h3><ul class="footer-links"><li><a href="#">Sell on Izzymall</a></li><li><a href="#">Affiliate Program</a></li></ul></div>
+      <div><h3 class="footer-col-title">About Izzymall</h3><ul class="footer-links"><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li></ul></div>
+    </div></div>
+    <div class="container footer-bottom"><p class="footer-copy">© 2024 Izzymall.ng Limited. All Rights Reserved.</p><nav class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></nav></div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

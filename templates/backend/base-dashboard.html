@@ -1,0 +1,185 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Dashboard — Avefon Trade Ltd{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:#F0F2F8;color:#1A1A2E}
+    a{text-decoration:none;color:inherit}
+
+    .dash-wrap{display:flex;min-height:100vh}
+
+    /* ── SIDEBAR ── */
+    .dash-sidebar{width:250px;background:#111E4A;flex-shrink:0;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+    .dash-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px}
+    .dash-logo svg{flex-shrink:0}
+    .dash-logo-text{color:#fff;font-size:15px;font-weight:800;letter-spacing:.5px;line-height:1.2}
+    .dash-logo-text span{color:#D4AF37}
+    .dash-logo-sub{color:rgba(255,255,255,.4);font-size:10px;margin-top:2px}
+    .dash-role-badge{margin:12px 16px;background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.3);border-radius:5px;padding:6px 12px;font-size:11px;font-weight:700;color:#D4AF37;text-transform:uppercase;letter-spacing:.5px}
+    .dash-nav{padding:8px 0;flex:1}
+    .dash-nav-section{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);padding:12px 20px 4px;font-weight:700}
+    .dash-nav-link{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:rgba(255,255,255,.6);transition:all .2s;border-left:3px solid transparent}
+    .dash-nav-link:hover,.dash-nav-link.active{background:rgba(255,255,255,.07);color:#fff;border-left-color:#D4AF37}
+    .dash-nav-link i{width:18px;text-align:center;font-size:14px;flex-shrink:0}
+    .dash-nav-badge{margin-left:auto;background:#E53935;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
+    .dash-sidebar-bottom{padding:16px 20px;border-top:1px solid rgba(255,255,255,.08)}
+    .dash-user-info{display:flex;align-items:center;gap:10px}
+    .dash-avatar{width:36px;height:36px;border-radius:50%;background:#D4AF37;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#111E4A;flex-shrink:0}
+    .dash-user-name{font-size:13px;font-weight:600;color:#fff}
+    .dash-user-role{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px}
+
+    /* ── TOPBAR ── */
+    .dash-topbar{background:#fff;border-bottom:1px solid #E0E4EF;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+    .dash-topbar-left{display:flex;align-items:center;gap:12px}
+    .dash-topbar-title{font-size:16px;font-weight:700;color:#111E4A}
+    .dash-topbar-right{display:flex;align-items:center;gap:12px}
+    .dash-topbar-icon{width:36px;height:36px;border-radius:50%;background:#F0F2F8;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;position:relative;color:#6B7280}
+    .dash-topbar-icon:hover{background:#EEF1FB;color:#111E4A}
+    .dash-notif-dot{position:absolute;top:4px;right:4px;width:8px;height:8px;background:#E53935;border-radius:50%;border:2px solid #fff}
+    .dash-store-link{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#1B2D6B;background:#EEF1FB;padding:7px 14px;border-radius:6px}
+
+    /* ── CONTENT ── */
+    .dash-content{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+    .dash-page{padding:24px;flex:1}
+
+    /* ── STAT CARDS ── */
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+    .stat-card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:flex-start;gap:14px;border:1px solid #E0E4EF}
+    .stat-card-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .stat-val{font-size:24px;font-weight:800;color:#111E4A;line-height:1}
+    .stat-label{font-size:12px;color:#6B7280;margin-top:4px}
+
+    /* ── TABLES ── */
+    .dash-card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);overflow:hidden;border:1px solid #E0E4EF;margin-bottom:20px}
+    .dash-card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #F3F4F6;background:#FAFBFE}
+    .dash-card-title{font-weight:700;font-size:14px;color:#111E4A;display:flex;align-items:center;gap:8px}
+    .dash-card-action{font-size:12px;font-weight:600;color:#1B2D6B;background:#EEF1FB;padding:6px 14px;border-radius:5px}
+    .dash-table{width:100%;border-collapse:collapse;font-size:13px}
+    .dash-table th{text-align:left;padding:10px 16px;background:#F5F6FA;color:#6B7280;font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+    .dash-table td{padding:12px 16px;border-bottom:1px solid #F3F4F6;color:#1A1A2E;vertical-align:middle}
+    .dash-table tr:last-child td{border-bottom:none}
+    .dash-table tr:hover td{background:#FAFBFE}
+    .badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+    .badge-success{background:#D1FAE5;color:#065F46}
+    .badge-warning{background:#FEF3C7;color:#92400E}
+    .badge-info{background:#DBEAFE;color:#1E40AF}
+    .badge-danger{background:#FEE2E2;color:#991B1B}
+    .badge-purple{background:#EDE9FE;color:#5B21B6}
+
+    /* ── FORMS ── */
+    .dash-form-group{margin-bottom:16px}
+    .dash-form-group label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:5px}
+    .dash-input{width:100%;padding:10px 14px;border:1px solid #D1D5DB;border-radius:6px;font-size:13px;font-family:inherit;color:#111E4A;background:#fff;transition:border .2s}
+    .dash-input:focus{outline:none;border-color:#1B2D6B;box-shadow:0 0 0 3px rgba(27,45,107,.08)}
+    .dash-btn{padding:10px 22px;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit}
+    .dash-btn-primary{background:#1B2D6B;color:#fff}
+    .dash-btn-primary:hover{background:#253D8A}
+    .dash-btn-gold{background:#D4AF37;color:#111E4A}
+    .dash-btn-danger{background:#EF4444;color:#fff}
+
+    @media(max-width:768px){
+      .dash-sidebar{display:none}
+      .dash-page{padding:16px}
+      .stat-grid{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+<div class="dash-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar">
+    <div class="dash-logo">
+      <svg width="32" height="32" viewBox="0 0 38 38" fill="none">
+        <polygon points="19,3 33,35 24,35 19,22 14,35 5,35" fill="#D4AF37"/>
+        <path d="M5,27 Q19,15 33,22" stroke="#8A7010" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="dash-logo-text">AVEFON <span>TRADE</span></div>
+        <div class="dash-logo-sub">Ghana's Clothing Buyer</div>
+      </div>
+    </div>
+    <div class="dash-role-badge">{% block sidebar_role %}Dashboard{% endblock %}</div>
+    <nav class="dash-nav">{% block sidebar_nav %}{% endblock %}</nav>
+    <div class="dash-sidebar-bottom">
+      <div class="dash-user-info">
+        <div class="dash-avatar">
+          {% if request.user.first_name %}
+            {{ request.user.first_name|first|upper }}{% if request.user.last_name %}{{ request.user.last_name|first|upper }}{% endif %}
+          {% else %}
+            {{ request.user.username|first|upper }}
+          {% endif %}
+        </div>
+        <div>
+          <div class="dash-user-name">{{ request.user.get_full_name|default:request.user.username }}</div>
+          <div class="dash-user-role">{% block user_role_label %}Member{% endblock %}</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="dash-content">
+    <header class="dash-topbar">
+      <div class="dash-topbar-left">
+        <span class="dash-topbar-title">{% block page_title %}Dashboard{% endblock %}</span>
+      </div>
+      <div class="dash-topbar-right">
+        <div class="dash-topbar-icon" title="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="dash-notif-dot"></span>
+        </div>
+        <a href="{% url 'frontend:index' %}" class="dash-store-link">
+          <i class="fas fa-store"></i> Back to Store
+        </a>
+        <a href="#" onclick="showLogoutModal();return false" style="font-size:12px;color:#E53935;font-weight:600;display:flex;align-items:center;gap:5px">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </header>
+    <div class="dash-page">
+      {% if messages %}
+        {% for msg in messages %}
+        <div style="padding:12px 16px;border-radius:8px;margin-bottom:16px;background:{% if 'error' in msg.tags %}#FEE2E2{% else %}#D1FAE5{% endif %};color:{% if 'error' in msg.tags %}#991B1B{% else %}#065F46{% endif %};font-size:13px">
+          {{ msg }}
+        </div>
+        {% endfor %}
+      {% endif %}
+      {% block dashboard_content %}{% endblock %}
+    </div>
+  </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+{% block scripts %}{% endblock %}
+
+<!-- LOGOUT MODAL -->
+<div id="logoutModal" style="display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;background:rgba(17,30,74,0.7);backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:14px;padding:32px 28px;max-width:360px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+    <div style="font-size:48px;margin-bottom:12px">👋</div>
+    <h3 style="font-size:18px;font-weight:700;color:#111E4A;margin-bottom:8px">Logging Out?</h3>
+    <p style="font-size:13px;color:#6B7280;margin-bottom:24px">Are you sure you want to log out of your Avefon account?</p>
+    <div style="display:flex;gap:10px">
+      <button onclick="hideLogoutModal()" style="flex:1;padding:11px;border:1px solid #E0E4EF;background:#fff;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer">Cancel</button>
+      <form method="POST" action="{% url 'frontend:logout' %}" style="flex:1">
+        {% csrf_token %}
+        <button type="submit" style="width:100%;padding:11px;border:none;background:#E53935;border-radius:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer">Yes, Log Out</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+function showLogoutModal(){document.getElementById('logoutModal').style.display='flex';}
+function hideLogoutModal(){document.getElementById('logoutModal').style.display='none';}
+document.addEventListener('click',function(e){if(e.target===document.getElementById('logoutModal'))hideLogoutModal();});
+</script>
+
+</body>
+</html>

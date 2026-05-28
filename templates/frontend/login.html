@@ -1,0 +1,55 @@
+{% extends 'frontend/base.html' %}
+{% load static %}
+{% block title %}Sign In — Avefon Trade Ltd{% endblock %}
+{% block content %}
+<main style="background:#F5F6FA;min-height:80vh;display:flex;align-items:center;padding:48px 0">
+  <div class="container" style="max-width:460px;margin:0 auto">
+
+    {% if messages %}
+    {% for msg in messages %}
+    <div class="alert alert-{{ msg.tags }}" style="padding:12px 16px;border-radius:8px;margin-bottom:16px;background:{% if 'success' in msg.tags %}#E8F5E9{% elif 'error' in msg.tags %}#FFEBEE{% else %}#EEF1FB{% endif %};color:{% if 'success' in msg.tags %}#1B5E20{% elif 'error' in msg.tags %}#B71C1C{% else %}#1B2D6B{% endif %}">
+      {{ msg }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(27,45,107,0.12)">
+      <div style="background:#1B2D6B;padding:28px 28px 24px;text-align:center">
+        <svg width="48" height="48" viewBox="0 0 38 38" fill="none" style="margin:0 auto 12px;display:block">
+          <polygon points="19,3 33,35 24,35 19,22 14,35 5,35" fill="#ffffff"/>
+          <path d="M5,27 Q19,15 33,22" stroke="#D4AF37" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div style="color:#fff;font-size:20px;font-weight:700;letter-spacing:1px">AVEFON TRADE LTD</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:12px;margin-top:4px">Seller Portal — Sign In</div>
+      </div>
+      <div style="padding:28px">
+        <form method="POST" action="{% url 'frontend:login' %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">
+          {% csrf_token %}
+          <div style="margin-bottom:14px">
+            <label class="av-lbl">Username</label>
+            <input type="text" name="username" class="av-input" placeholder="Your username" required autofocus>
+          </div>
+          <div style="margin-bottom:18px">
+            <label class="av-lbl">Password</label>
+            <input type="password" name="password" class="av-input" placeholder="Your password" required>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:12px">
+            <label style="display:flex;align-items:center;gap:6px;color:#6B7280;cursor:pointer">
+              <input type="checkbox" name="remember" style="accent-color:#1B2D6B"> Remember me
+            </label>
+            <a href="#" style="color:#1B2D6B">Forgot password?</a>
+          </div>
+          <button type="submit" class="av-submit">🔐 Sign In to Seller Account</button>
+        </form>
+        <div style="text-align:center;margin-top:16px;font-size:13px;color:#6B7280">
+          No account? <a href="{% url 'frontend:register' %}" style="color:#1B2D6B;font-weight:700">Register here →</a>
+        </div>
+        <div style="text-align:center;margin-top:8px;font-size:13px;color:#6B7280">
+          Want to sell? <a href="{% url 'frontend:vendor-register' %}" style="color:#D4AF37;font-weight:700">Register as Seller →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+{% endblock %}
