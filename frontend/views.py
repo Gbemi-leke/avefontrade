@@ -178,9 +178,25 @@ def vendor_register(request):
         last  = request.POST.get('last_name', '').strip()
         uname = request.POST.get('username', '').strip()
         email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
         pwd1  = request.POST.get('password1', '')
         pwd2  = request.POST.get('password2', '')
-        if pwd1 != pwd2:
+        otp   = request.POST.get('otp_code', '').strip()
+
+        # Normalise phone for session key lookup
+        phone_key = phone.replace(' ', '').replace('-', '')
+        if phone_key.startswith('0'):
+            phone_key = '+233' + phone_key[1:]
+        elif not phone_key.startswith('+'):
+            phone_key = '+' + phone_key
+
+        saved_otp = request.session.get(f'otp_{phone_key}', '')
+
+        if not otp or not saved_otp:
+            messages.error(request, '❌ Please request and enter your verification code.')
+        elif otp != saved_otp:
+            messages.error(request, '❌ Incorrect verification code. Please try again.')
+        elif pwd1 != pwd2:
             messages.error(request, '❌ Passwords do not match.')
         elif User.objects.filter(username=uname).exists():
             messages.error(request, '❌ Username already taken.')
@@ -190,6 +206,8 @@ def vendor_register(request):
             user = User.objects.create_user(username=uname, email=email,
                 password=pwd1, first_name=first, last_name=last)
             login(request, user)
+            # Clear OTP from session
+            request.session.pop(f'otp_{phone_key}', None)
             messages.success(request, f'🎉 Seller account created! Welcome {first}.')
             return redirect('backend:seller-dashboard')
     return render(request, 'frontend/vendor-register.html', {'categories': CATEGORIES})

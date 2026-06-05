@@ -375,3 +375,367 @@ a { text-decoration: none; }
   .av-footer-grid { grid-template-columns: 1fr; }
   .av-cat-grid { grid-template-columns: repeat(4, 1fr) !important; }
 }
+
+/* ============================================================
+   MOBILE LISTING PAGE — Stack sidebar above products
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Stack the listing grid vertically */
+  .listing-grid,
+  .product-listing-grid,
+  [style*="grid-template-columns: 220px"] {
+    display: block !important;
+  }
+
+  /* Sidebar full width, no sticky */
+  .listing-sidebar,
+  aside.listing-sidebar {
+    width: 100% !important;
+    position: static !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Product grid full width */
+  .listing-content,
+  .product-listing-content {
+    width: 100% !important;
+  }
+}
+
+/* ============================================================
+   AVEFON MOBILE RESPONSIVE — Clean Version
+   ============================================================ */
+
+/* ── HEADER: logo left, hamburger right ── */
+@media (max-width: 768px) {
+
+  .header-inner {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    height: auto !important;
+    padding: 12px 16px !important;
+    gap: 0 !important;
+  }
+
+  .site-logo {
+    order: 1 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .hamburger {
+    order: 2 !important;
+    margin-left: auto !important;
+    display: flex !important;
+    flex-shrink: 0 !important;
+  }
+
+  .header-icons {
+    display: none !important;
+  }
+
+  .header-search {
+    order: 3 !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+    padding: 0 !important;
+  }
+
+  .site-navbar {
+    display: none !important;
+  }
+
+  /* ── Gap between search and page content ── */
+  .container > .hero-section,
+  main .container > section:first-child,
+  main .container > div:first-child {
+    margin-top: 14px !important;
+  }
+
+  /* ── LISTING PAGE: sidebar above, products below ── */
+  #listingGrid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+
+  #listingSidebar {
+    position: static !important;
+    width: 100% !important;
+  }
+}
+
+/* ============================================================
+   MOBILE LAYOUT — Logo left | Hamburger right | Spaced sections
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ── TOPBAR: hide on mobile to save space ── */
+  .topbar { display: none !important; }
+
+  /* ── HEADER: clean single row, proper padding ── */
+  .site-header { padding: 0 !important; }
+  .header-inner {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-direction: row !important;
+    height: auto !important;
+    padding: 14px 16px !important;
+    gap: 0 !important;
+  }
+
+  /* Logo: left */
+  .site-logo   { order: 1 !important; flex-shrink: 0 !important; }
+
+  /* Search: drop to its own full-width row below logo/hamburger */
+  .header-search {
+    order: 10 !important;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    padding: 8px 0 4px !important;
+    display: block !important;
+  }
+  /* Hide account icons — inside hamburger on mobile */
+  .header-icons { display: none !important; }
+
+  /* Hamburger: right */
+  .hamburger {
+    order: 2 !important;
+    display: flex !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ── SEARCH BAR: its own row with clear spacing ── */
+  .header-search-mobile {
+    display: block !important;
+    padding: 12px 16px 0 !important;
+    background: var(--navy, #1B2D6B) !important;
+  }
+  .header-search-mobile .search-form {
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  /* ── NAVBAR: hide the desktop nav ── */
+  .site-navbar { display: none !important; }
+
+  /* ── HERO SECTION: clear gap from search bar ── */
+  .container > .hero-section,
+  .hero-section {
+    margin-top: 16px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    padding-bottom: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-inner { padding: 12px 14px !important; }
+  .hero-section { margin-top: 12px !important; padding: 0 10px 10px !important; }
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE FIXES — /shop/ and /item/ pages
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ── SHOP / PRODUCT LISTING ─────────────────────────────── */
+  /* Stack sidebar above products */
+  .container > div[style*="grid-template-columns:220px"],
+  div[style*="grid-template-columns:220px 1fr"] {
+    display: block !important;
+  }
+
+  /* Sidebar: horizontal scrollable pills on mobile */
+  aside[style*="position:sticky"],
+  div[style*="position:sticky;top:80px"] {
+    position: static !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    background: #fff !important;
+    border-radius: 8px !important;
+    margin-bottom: 14px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+  aside[style*="position:sticky"] a,
+  div[style*="position:sticky;top:80px"] a {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 6px 14px !important;
+    border-radius: 20px !important;
+    border: 1px solid #E0E4EF !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    color: #1B2D6B !important;
+    display: inline-block !important;
+    border-bottom: none !important;
+  }
+
+  /* Product grid: 2 columns on mobile */
+  div[style*="grid-template-columns:repeat(auto-fill,minmax(195px"] ,
+  div[style*="grid-template-columns:repeat(auto-fill,minmax(200px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    display: grid !important;
+  }
+
+  /* ── PRODUCT DETAIL /item/ ──────────────────────────────── */
+  /* Stack image above details */
+  div[style*="grid-template-columns:1fr 1fr"][style*="box-shadow"] {
+    display: block !important;
+  }
+
+  /* Image section full width */
+  div[style*="grid-template-columns:1fr 1fr"][style*="box-shadow"] > div:first-child {
+    min-height: 240px !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+
+  /* Details section padding */
+  div[style*="grid-template-columns:1fr 1fr"][style*="box-shadow"] > div:last-child {
+    padding: 20px 16px !important;
+  }
+
+  /* Price font size */
+  div[style*="font-size:36px"] {
+    font-size: 28px !important;
+  }
+
+  /* Key info grid: 2 cols */
+  div[style*="grid-template-columns:1fr 1fr;gap:10px"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+
+  /* Related items: 2 cols */
+  div[style*="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* ── SELL OFFER FORM ────────────────────────────────────── */
+  div[style*="grid-template-columns:1fr 1fr 1fr"] {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    display: grid !important;
+  }
+  div[style*="grid-template-columns:1fr 1fr;gap:12px"],
+  div[style*="grid-template-columns:1fr 1fr;gap:14px"] {
+    grid-template-columns: 1fr !important;
+    display: grid !important;
+  }
+
+  /* ── GENERAL CONTAINER PADDING ─────────────────────────── */
+  .container { padding-left: 12px !important; padding-right: 12px !important; }
+
+  /* ── HERO SECTION ───────────────────────────────────────── */
+  .hero-section { padding: 12px !important; }
+  .cat-sidebar  { display: none !important; }
+}
+
+@media (max-width: 480px) {
+  /* Single column product grid on very small screens */
+  div[style*="grid-template-columns:repeat(2"] {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Sell offer 3-col → 1 col */
+  div[style*="grid-template-columns:1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================================
+   MOBILE HEADER — Logo left | Hamburger right | Search below
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* Topbar hidden on mobile */
+  .topbar { display: none !important; }
+
+  /* Header wraps so search drops to row 2 */
+  .header-inner {
+    flex-wrap: wrap !important;
+    padding: 10px 16px !important;
+    height: auto !important;
+    gap: 0 !important;
+    align-items: center !important;
+  }
+
+  /* Row 1: Logo left */
+  .site-logo {
+    order: 1 !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Row 1: Hide account icons */
+  .header-icons {
+    display: none !important;
+  }
+
+  /* Row 1: Hamburger far right */
+  .hamburger {
+    order: 2 !important;
+    margin-left: auto !important;
+    display: flex !important;
+  }
+
+  /* Row 2: Search bar full width */
+  .header-search {
+    order: 3 !important;
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    padding-top: 10px !important;
+    display: block !important;
+  }
+
+  /* Gap between search and hero */
+  .site-navbar { display: none !important; }
+
+  .hero-section {
+    margin-top: 14px !important;
+    padding: 0 12px 12px !important;
+  }
+}
+
+/* ============================================================
+   BOTTOM NAV — 4 items only: Home, Sell, Cart, Account
+   WhatsApp float moved above bottom nav
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Bottom nav: 4 equal items */
+  .bottom-nav-inner {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  /* WhatsApp float: sits above the bottom nav */
+  #waFloat {
+    bottom: 76px !important;
+    right: 16px !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  /* Back to top button also moved up */
+  #avTop {
+    bottom: 76px !important;
+  }
+}
+
+.hero-slide { position: relative; overflow: hidden; }
+.slide-bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.slide-bg-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; transition: transform 8s ease; }
+.hero-slide.is-active .slide-bg-img { transform: scale(1.06); }
+.slide-bg-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(17,30,74,0.82) 0%, rgba(17,30,74,0.65) 50%, rgba(17,30,74,0.35) 100%); }
+.slide-content { position: relative; z-index: 2; }

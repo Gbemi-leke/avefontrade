@@ -84,7 +84,15 @@
     .dash-btn-gold{background:#D4AF37;color:#111E4A}
     .dash-btn-danger{background:#EF4444;color:#fff}
 
+    /* ── MOBILE TOPBAR ── */
+    .dash-mob-topbar{display:none;background:#111E4A;padding:12px 16px;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid #D4AF37}
+    .dash-mob-logo{display:flex;align-items:center;gap:8px;color:#fff;font-size:15px;font-weight:800;letter-spacing:.5px}
+    .dash-mob-logo span{color:#D4AF37}
+    .dash-mob-hamburger{background:none;border:none;color:#fff;font-size:24px;cursor:pointer;padding:2px 4px;line-height:1}
+
     @media(max-width:768px){
+      .dash-mob-topbar{display:flex}
+      .dash-topbar{display:none}
       .dash-sidebar{display:none}
       .dash-page{padding:16px}
       .stat-grid{grid-template-columns:1fr 1fr}
@@ -92,6 +100,23 @@
   </style>
 </head>
 <body>
+<!-- ── MOBILE TOPBAR ── -->
+<div class="dash-mob-topbar">
+  <a href="{% url 'frontend:index' %}" class="dash-mob-logo">
+    <svg width="28" height="28" viewBox="0 0 38 38" fill="none">
+      <polygon points="19,3 33,35 24,35 19,22 14,35 5,35" fill="#D4AF37"/>
+      <path d="M5,27 Q19,15 33,22" stroke="#8A7010" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    AVEFON <span>TRADE</span>
+  </a>
+  <button class="dash-mob-hamburger" onclick="document.querySelector('.dash-sidebar').style.cssText='display:flex;position:fixed;top:0;left:0;z-index:9999;height:100vh;width:250px'">
+    ☰
+  </button>
+</div>
+
+<!-- Sidebar close overlay (mobile) -->
+<div id="sidebarOverlay" onclick="document.querySelector('.dash-sidebar').style.cssText='';document.getElementById('sidebarOverlay').style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998"></div>
+
 <div class="dash-wrap">
 
   <!-- SIDEBAR -->
@@ -176,6 +201,26 @@
   </div>
 </div>
 <script>
+// Mobile sidebar toggle
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.querySelector('.dash-mob-hamburger');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var sidebar = document.querySelector('.dash-sidebar');
+      var overlay = document.getElementById('sidebarOverlay');
+      sidebar.style.cssText = 'display:flex;position:fixed;top:0;left:0;z-index:9999;height:100vh;width:260px';
+      overlay.style.display = 'block';
+    });
+  }
+  var overlay = document.getElementById('sidebarOverlay');
+  if(overlay){
+    overlay.addEventListener('click', function(){
+      document.querySelector('.dash-sidebar').style.cssText = '';
+      overlay.style.display = 'none';
+    });
+  }
+});
+
 function showLogoutModal(){document.getElementById('logoutModal').style.display='flex';}
 function hideLogoutModal(){document.getElementById('logoutModal').style.display='none';}
 document.addEventListener('click',function(e){if(e.target===document.getElementById('logoutModal'))hideLogoutModal();});

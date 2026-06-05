@@ -63,7 +63,8 @@
                 <!-- Slide 1 -->
                 <div class="hero-slide" aria-label="We Buy Quality Clothes">
                   <div class="slide-bg">
-                    
+                    <img src="{% static 'frontend/images/hero1.png' %}?fit=crop&crop=center"
+                         alt="Quality clothing items" class="slide-bg-img" loading="eager"/>
                     <div class="slide-bg-overlay"></div>
                   </div>
                   <div class="slide-content">
@@ -77,19 +78,8 @@
                 <!-- Slide 2 -->
                 <div class="hero-slide" aria-label="Ankara Kente Dashiki Wanted">
                   <div class="slide-bg">
-                    <img
-                      src="{% static 'frontend/images/ankara.jpg' %}"
-                      alt="Surface Laptop promotion"
-                      width="760"
-                      height="537"
-                      fetchpriority="high"
-                      srcset="
-                        {% static 'frontend/images/Ankara-700x495.jpg.webp' %} 700w,
-                        {% static 'frontend/images/Ankara.jpg.webp' %}         760w,
-                        {% static 'frontend/images/Ankara-430x304.jpg.webp' %} 430w
-                      "
-                      sizes="(max-width:768px) 100vw, calc(100vw - 240px)"
-                    />
+                    <img src="{% static 'frontend/images/hero2.png' %}?fit=crop&crop=center"
+     alt="Ankara and Kente fabrics" class="slide-bg-img" loading="lazy"/>
                     <div class="slide-bg-overlay"></div>
                   </div>
                   <div class="slide-content">
@@ -103,7 +93,8 @@
                 <!-- Slide 3 -->
                 <div class="hero-slide" aria-label="GHC 3M Paid to Sellers">
                   <div class="slide-bg">
-                   
+                    <img src="{% static 'frontend/images/hero3.png' %}?fit=crop&crop=center"
+                         alt="Ghana clothing market" class="slide-bg-img" loading="lazy"/>
                     <div class="slide-bg-overlay"></div>
                   </div>
                   <div class="slide-content">
@@ -334,25 +325,25 @@
         <!-- ===== PROMO BANNERS ===== -->
         <section class="banners-grid" aria-label="Promotional banners">
           <a href="#" class="banner-card"  style="cursor:pointer">
-            <div style="width:100%;height:100%;min-height:280px;background:linear-gradient(135deg,#1B2D6B 0%,#253D8A 100%);display:flex;align-items:center;justify-content:center;font-size:120px;position:relative;overflow:hidden">
-              👔
+            <div style="width:100%;height:100%;min-height:280px;position:relative;overflow:hidden">
+              <img src="{% static 'frontend/images/banner1.png' %}" alt="Men's and Women's Clothing" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
               <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(17,30,74,0.85) 100%)"></div>
             </div>
             <div class="banner-overlay" style="position:absolute;bottom:0;left:0;right:0;padding:20px">
-              <p class="banner-tag" style="background:#D4AF37;color:#111E4A;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Urgent Buy</p>
+              <p class="banner-tag" style="background:#D4AF37;color:#111E4A;font-size:10px;font-weight:700;padding:3px 10px;border-radius:3px;display:inline-block;width:fit-content;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Urgent Buy</p>
               <h3 class="banner-title" style="color:#fff;font-size:20px;font-weight:700;margin-bottom:8px">Men's &amp; Women's Clothing Wanted</h3>
-              <span class="banner-btn" style="background:#D4AF37;color:#111E4A;padding:8px 16px;border-radius:4px;font-size:13px;font-weight:700;display:inline-block">Sell to Us →</span>
+              <span class="banner-btn" style="background:#D4AF37;color:#111E4A;padding:8px 16px;border-radius:4px;font-size:13px;font-weight:700;display:inline-block;width:fit-content">Sell to Us →</span>
             </div>
           </a>
           <a href="#" class="banner-card"  style="cursor:pointer">
-            <div style="width:100%;height:100%;min-height:280px;background:linear-gradient(135deg,#111E4A 0%,#1B2D6B 100%);display:flex;align-items:center;justify-content:center;font-size:120px;position:relative;overflow:hidden">
-              🧣
+            <div style="width:100%;height:100%;min-height:280px;position:relative;overflow:hidden">
+              <img src="{% static 'frontend/images/banner2.png' %}" alt="Kente and Traditional Fabrics" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
               <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(17,30,74,0.85) 100%)"></div>
             </div>
             <div class="banner-overlay" style="position:absolute;bottom:0;left:0;right:0;padding:20px">
-              <p class="banner-tag" style="background:#E53935;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Top Prices</p>
+              <p class="banner-tag" style="background:#E53935;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:3px;display:inline-block;width:fit-content;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Top Prices</p>
               <h3 class="banner-title" style="color:#fff;font-size:20px;font-weight:700;margin-bottom:8px">Kente &amp; Traditional Fabrics</h3>
-              <span class="banner-btn" style="background:#D4AF37;color:#111E4A;padding:8px 16px;border-radius:4px;font-size:13px;font-weight:700;display:inline-block">Submit Offer →</span>
+              <span class="banner-btn" style="background:#D4AF37;color:#111E4A;padding:8px 16px;border-radius:4px;font-size:13px;font-weight:700;display:inline-block;width:fit-content">Submit Offer →</span>
             </div>
           </a>
         </section>

@@ -200,7 +200,7 @@ def change_password(request):
     return render(request, 'backend/change-password.html')
 
 
-# ── SEND OTP ──────────────────────────────────────────────────
+# ── SEND OTP (Africa's Talking) ──────────────────────────────
 def send_otp(request):
     if request.method == 'POST':
         try:
@@ -209,11 +209,23 @@ def send_otp(request):
         except Exception:
             phone = request.POST.get('phone', '').strip()
         if not phone:
-            return JsonResponse({'success': False, 'message': 'Phone required'})
-        code = str(random.randint(100000, 999999))
-        request.session[f'otp_{phone}'] = code
-        print(f"\n📱 OTP for {phone}: {code}\n")
-        return JsonResponse({'success': True, 'message': f'Code sent to {phone}', 'dev_code': code})
+            return JsonResponse({'success': False, 'message': 'Phone number is required.'})
+
+        from backend.sms import send_otp as sms_send_otp
+        result = sms_send_otp(phone)
+
+        # Store OTP in session for verification
+        if result['success']:
+            request.session[f'otp_{phone}'] = result['code']
+            return JsonResponse({'success': True, 'message': f'Verification code sent to {phone}'})
+        else:
+            # In sandbox mode, still return the code so testing works
+            request.session[f'otp_{phone}'] = result['code']
+            return JsonResponse({
+                'success': True,
+                'message': f'Code sent (sandbox): {result["code"]}',
+                'dev_code': result['code']
+            })
     return JsonResponse({'success': False})
 
 

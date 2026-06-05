@@ -77,3 +77,9 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR:   'alert-danger',
 }
+
+
+# ── Africa's Talking SMS ──────────────────────────────────────
+AT_USERNAME = 'sandbox'   # Change to your real username when going live
+AT_API_KEY  = 'atsk_f2b1fc7ed712c915a38122d7f90bd0ebe029eb7bbc1fca1702d580de7d3a64ab1cd231a1'
+AT_SENDER   = 'AVEFON'    # Your sender ID (may need approval for live)
